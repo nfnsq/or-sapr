@@ -38,27 +38,11 @@ namespace View
         /// <param name="e"></param>
         private void buildButton_Click(object sender, EventArgs e)
         {
-            rebuildButton.Enabled = true;
             double[] param = ReadData();
             if (param != null)
             {
                 GearBuilder Gear = new GearBuilder(param);
                 Gear.New();
-            }
-        }
-
-        /// <summary>
-        /// Пересоздает деталь в том же документе
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void rebuildButton_Click(object sender, EventArgs e)
-        {
-            double[] param = ReadData();
-            if (param != null)
-            {
-                GearBuilder Gear = new GearBuilder(param);
-                Gear.Update();
             }
         }
 

@@ -31,7 +31,6 @@
             this.kompasCheckGroupBox = new System.Windows.Forms.GroupBox();
             this.kompasCheckBox = new System.Windows.Forms.CheckBox();
             this.buildButton = new System.Windows.Forms.Button();
-            this.rebuildButton = new System.Windows.Forms.Button();
             this.dataGroupBox = new System.Windows.Forms.GroupBox();
             this.hexDipDepthTextBox = new System.Windows.Forms.TextBox();
             this.stiffDepthTextBox = new System.Windows.Forms.TextBox();
@@ -83,17 +82,6 @@
             this.buildButton.Text = "Build";
             this.buildButton.UseVisualStyleBackColor = true;
             this.buildButton.Click += new System.EventHandler(this.buildButton_Click);
-            // 
-            // rebuildButton
-            // 
-            this.rebuildButton.Enabled = false;
-            this.rebuildButton.Location = new System.Drawing.Point(160, 313);
-            this.rebuildButton.Name = "rebuildButton";
-            this.rebuildButton.Size = new System.Drawing.Size(75, 23);
-            this.rebuildButton.TabIndex = 2;
-            this.rebuildButton.Text = "Rebuild";
-            this.rebuildButton.UseVisualStyleBackColor = true;
-            this.rebuildButton.Click += new System.EventHandler(this.rebuildButton_Click);
             // 
             // dataGroupBox
             // 
@@ -271,7 +259,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(327, 348);
             this.Controls.Add(this.dataGroupBox);
-            this.Controls.Add(this.rebuildButton);
             this.Controls.Add(this.buildButton);
             this.Controls.Add(this.kompasCheckGroupBox);
             this.Name = "GearConstructingForm";
@@ -289,7 +276,6 @@
         private System.Windows.Forms.GroupBox kompasCheckGroupBox;
         private System.Windows.Forms.Button buildButton;
         private System.Windows.Forms.CheckBox kompasCheckBox;
-        private System.Windows.Forms.Button rebuildButton;
         private System.Windows.Forms.GroupBox dataGroupBox;
         private System.Windows.Forms.TextBox hexDipDepthTextBox;
         private System.Windows.Forms.TextBox stiffDepthTextBox;
