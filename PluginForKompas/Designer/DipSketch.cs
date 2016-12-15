@@ -7,12 +7,13 @@ namespace PluginForKompas
 {
     public static class DipSketch
     {
-        public static void DrawDipSketch(double m, double z, double l)
+        public static void DrawDipSketch(double m, double z, double k)
         {
             double a0 = KompasApp.mat.ksAngle(0, 0, 1, 0);
             double a180 = KompasApp.mat.ksAngle(0, 0, -1, 0);
             double x;
             double y;
+            double l = k / 2;
             try
             {
                 ksSketchDefinition def = SketchCreator.MakeSketch();

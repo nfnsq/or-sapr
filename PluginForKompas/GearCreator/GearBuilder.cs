@@ -4,14 +4,16 @@ namespace PluginForKompas
 {
     public class GearBuilder
     {
-        private double d1 = 22;
-        private double d2 = 27.5;
-        private double d3 = 36;
-        private double a = 12;
-        private double b = 20;
-        private double h = 20;
-        private double z = 20;
-        private double m = 10;
+        private double[] _list = new double[0];
+
+        public GearBuilder(params double[] list)
+        {
+            for (int i = 0; i < list.Length; i++)
+            {
+                Array.Resize<double>(ref _list, i + 1);
+                this._list[i] = list[i];
+            }
+        }
 
         public void New()
         {
@@ -27,39 +29,57 @@ namespace PluginForKompas
 
         private void DoDetail()
         {
-            CircleSketch.DrawCircle(0, 0, m * (z + 2) / 2, 1);
-            ExtrusionMaker.DoOperationExtrusion(m * z * 0.15);
-            ChamferMaker.Create(4, 0, m * z * 0.15 / 2, m * (z + 2) / 2);
-            ChamferMaker.Create(4, 0, - m * z * 0.15 / 2, - m * (z + 2) / 2);
+            ///окружность выступов
+            double Da = _list[6] * (_list[7] + 2);
+            ///делительная окружность
+            double D = _list[6] * _list[7];
+            ///основная окружность
+            double Db = D * Math.Cos(20 * Math.PI / 180);
+            ///окружность впадин
+            double Df = _list[6] * (_list[7] - 2.5);
+            ///толщина шестерни
+            double gearDepth = _list[6] * _list[7] * 0.15;
+            
+            ///построить цилиндр
+            CircleSketch.DrawCircle(0, 0, Da / 2, 1);
+            ExtrusionMaker.DoOperationExtrusion(gearDepth);
+            ChamferMaker.Create(4, 0, gearDepth / 2, Da / 2);
+            ChamferMaker.Create(4, 0, -gearDepth / 2, -Da / 2);
 
-            GearTeethSketch.DrawGearTeeth(z, m);
-            HoleMaker.CutExtrusion(m * z * 0.15);
-            CircularCopyMaker.CreateOperationCircPartArray((int)z);
+            ///вырезать зубъя
+            GearTeethSketch.DrawGearTeeth(_list[7], _list[6]);
+            HoleMaker.CutExtrusion(gearDepth);
+            CircularCopyMaker.CreateOperationCircPartArray((int)_list[7]);
 
-            CircleSketch.DrawCircle(0, 0, d1 / 2, 1);
-            HoleMaker.CutExtrusion(m * z * 0.15);
+            ///отверстие 1
+            CircleSketch.DrawCircle(0, 0, _list[5] / 2, 1);
+            HoleMaker.CutExtrusion(gearDepth);
 
-            CircleSketch.DrawCircle(0, m * (z + 2) / 4, d2 / 2, 1);
-            HoleMaker.CutExtrusion(m * z * 0.15);
+            ///отверстя 2-6
+            CircleSketch.DrawCircle(0, Da / 4, _list[4] / 2, 1);
+            HoleMaker.CutExtrusion(gearDepth);
             CircularCopyMaker.CreateOperationCircPartArray((int)5);
 
-            KompasApp.MovingBasePlaneByYAxis(m * z * 0.15 / 2);
+            ///смещение
+            KompasApp.MovingBasePlaneByYAxis(gearDepth / 2);
 
-            HexagonSketch.DrawHexagon(d3 / 2);
-            HoleMaker.CutExtrusion(2 * h);
+            ///углубление под гайку
+            HexagonSketch.DrawHexagon(_list[3] / 2);
+            HoleMaker.CutExtrusion(_list[0] * 2);
 
-            DipSketch.DrawDipSketch(m, z, a / 2);
-            HoleMaker.CutExtrusion(2 * b);
-            ChamferMaker.Create(4, 0, m * z * 0.075, -m * (z + 2) / 8);
+            ///ребра жесткости
+            DipSketch.DrawDipSketch(_list[6], _list[7], _list[1]);
+            HoleMaker.CutExtrusion(_list[2] * 2);
+            double R = 0.9 * Df / 2;
+            ChamferMaker.Create(4, 0, gearDepth / 2, -Da / 8);
+            ChamferMaker.Create(4, 0, gearDepth / 2, -R);
 
-            double R = 0.9 * m * (z - 2.5) / 2;
-            ChamferMaker.Create(4, 0, m * z * 0.075, -R);
-            ChamferMaker.Create(4, 
-                Math.Cos(54 * Math.PI / 180) * R - a / 2 / Math.Sin(54 * Math.PI /180),
-                m * z * 0.075, -Math.Sin(54 * Math.PI / 180) * R);
             ChamferMaker.Create(4,
-                - Math.Cos(54 * Math.PI / 180) * R + a / 2 / Math.Sin(54 * Math.PI / 180),
-                m * z * 0.075, -Math.Sin(54 * Math.PI / 180) * R); 
+                Math.Cos(54 * Math.PI / 180) * R - _list[1] / 2 / Math.Sin(54 * Math.PI / 180),
+                gearDepth / 2, -Math.Sin(54 * Math.PI / 180) * R);
+            ChamferMaker.Create(4,
+                -Math.Cos(54 * Math.PI / 180) * R + _list[1] / 2 / Math.Sin(54 * Math.PI / 180),
+                gearDepth / 2, -Math.Sin(54 * Math.PI / 180) * R); 
             
             CircularCopyMaker.CreateChamferCircPartArray((int)5);
 
