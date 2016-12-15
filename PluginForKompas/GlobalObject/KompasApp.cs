@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace PluginForKompas
 {
+    /// <summary>
+    /// Класс который создает обязательные объекты КОМПАС
+    /// </summary>
     public static class KompasApp
     {
         public static KompasObject kompas;
@@ -35,36 +38,6 @@ namespace PluginForKompas
             {
                 MessageBox.Show("KompasApplication doesn't found!", "Warning",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        /// <summary>
-        /// Метод получает указатель на интерфейс
-        /// текущего документа трехмерной модели
-        /// и указатель на интерфейс главного компонента
-        /// </summary>
-        public static void GetActiveDoc()
-        {
-            try
-            {
-                doc3d = (ksDocument3D)kompas.ActiveDocument3D();
-                part = (ksPart)doc3d.GetPart((short)Part_Type.pTop_Part);
-                basePlane = (ksEntity)part.GetDefaultEntity((short)Obj3dType.o3d_planeXOZ);
-                mat = (ksMathematic2D)kompas.GetMathematic2D();
-
-                EntityCollection entityCol = (EntityCollection)part.EntityCollection((short)Obj3dType.o3d_unknown);
-                
-                for (int i = 0; i < entityCol.GetCount(); i++)
-                {
-                    ksEntity entity = entityCol.GetByIndex(i);
-                    doc3d.DeleteObject(entity);
-                }
-            }
-            catch
-            {
-                MessageBox.Show("KompasApplication doesn't found!", "Warning",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
             }
         }
 

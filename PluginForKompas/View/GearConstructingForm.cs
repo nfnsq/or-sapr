@@ -25,10 +25,32 @@ namespace View
         private void kompasCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (kompasCheckBox.Checked)
+            {
                 KompasApp.GetActiveApp();
-            
+                teethCountTextBox.Enabled = true;
+                rigidityUnitTextBox.Enabled = true;
+                buildButton.Enabled = true;
+            }
+
             if (!kompasCheckBox.Checked)
+            {
                 KompasApp.Exit();
+                foreach (Control groupBoxData in this.Controls)
+                {
+                    if ((groupBoxData is GroupBox)
+                        && (groupBoxData.Name == "dataGroupBox"))
+                    {
+                        foreach (Control textbox in groupBoxData.Controls)
+                        {
+                            if (textbox is TextBox)
+                            {
+                                textbox.Enabled = false;
+                            }
+                        }
+                    }
+                }
+                buildButton.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -79,12 +101,18 @@ namespace View
             }
             catch (Exception)
             {
-                MessageBox.Show("Oops! There are empty fields. Please, try again.", "Error",
+                MessageBox.Show("There are empty fields. Please, try again.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
 
+        /// <summary>
+        /// Метод для проверки основных параметров шестерни
+        /// </summary>
+        /// <param name="regex">Регулярное выражение</param>
+        /// <param name="text">Проверяемая строка</param>
+        /// <param name="e">Данные отменяемого события</param>
         private void CheckData(Regex regex, string text, CancelEventArgs e)
         {
             if ((regex.IsMatch(text) != true) && (text != ""))
@@ -96,6 +124,13 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Метод для проверки зависимых от основных параметров шестерни
+        /// </summary>
+        /// <param name="text">Проверяемая строка</param>
+        /// <param name="a">Минимально допустимое значение</param>
+        /// <param name="b">Максимально допустимое значение</param>
+        /// <param name="e">Данные отменяемого события</param>
         private void CheckData(string text, double a, double b, CancelEventArgs e)
         {
             Regex regex = new Regex("^[1-9]{1}[0-9]{0,2}$");
@@ -120,6 +155,11 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Метод проверяет параметры глубины вырезов
+        /// </summary>
+        /// <param name="text">Проверяемая строка</param>
+        /// <param name="e">Данные отменяемого события</param>
         private void CheckDepth(string text, CancelEventArgs e)
         {
             double min = 0;
@@ -178,30 +218,6 @@ namespace View
             CheckDepth(hexDipDepthTextBox.Text, e);
         }
 
-        private void centerHoleDiamTextBox_Validated(object sender, EventArgs e)
-        {
-            if (centerHoleDiamTextBox.Text != "")
-            hexDiamTextBox.Enabled = true;
-        }
-
-        private void rigidityUnitTextBox_Validated(object sender, EventArgs e)
-        {
-            if (rigidityUnitTextBox.Text != "")
-            {
-                rigidity = double.Parse(rigidityUnitTextBox.Text);
-                enableTextBoxs();
-            }
-        }
-
-        private void teethCountTextBox_Validated(object sender, EventArgs e)
-        {
-            if (teethCountTextBox.Text != "")
-            {
-                teethCount = double.Parse(teethCountTextBox.Text);
-                enableTextBoxs();
-            }
-        }
-
         private void enableTextBoxs()
         {
             if ((rigidity != 0) && (teethCount != 0))
@@ -213,5 +229,54 @@ namespace View
                 hexDipDepthTextBox.Enabled = true;
             }
         }
+
+        private void disableTextBoxs()
+        {
+            centerHoleDiamTextBox.Enabled = false;
+            circHolesDiamTextBox.Enabled = false;
+            stiffDepthTextBox.Enabled = false;
+            stiffWidthTextBox.Enabled = false;
+            hexDipDepthTextBox.Enabled = false;
+        }
+
+        private void teethCountTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Regex.IsMatch(teethCountTextBox.Text, "^[1-9]{1}[0-9]{0,1}$"))
+            {
+                teethCount = double.Parse(teethCountTextBox.Text);
+                enableTextBoxs();
+            }
+            else
+            {
+                disableTextBoxs();
+            }
+        }
+        
+        private void rigidityUnitTextBox_TextChanged(object sender, EventArgs e)
+
+        {
+            if (Regex.IsMatch(rigidityUnitTextBox.Text, "^[1-5]{1}[0-9]{0,1}\\.{0,1}[0-9]{0,1}5{0,1}$"))
+            {
+                rigidity = double.Parse(rigidityUnitTextBox.Text);
+                enableTextBoxs();
+            }
+            else
+            {
+                disableTextBoxs();
+            }
+        }
+
+        private void centerHoleDiamTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Regex.IsMatch(centerHoleDiamTextBox.Text, "^[1-9]{1}[0-9]{0,2}$"))
+            {
+                hexDiamTextBox.Enabled = true;
+            }
+            else
+            {
+                hexDiamTextBox.Enabled = false;
+            }
+        }
+
     }
 }

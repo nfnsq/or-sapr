@@ -82,7 +82,7 @@
     <Compile Include="ChamferMaker.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GetPointIntersect.cs" />
+    <Compile Include="PointIntersect.cs" />
     <Compile Include="HoleMaker.cs" />
     <Compile Include="ExtrusionMaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

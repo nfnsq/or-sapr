@@ -2,10 +2,20 @@
 
 namespace PluginForKompas
 {
+    /// <summary>
+    /// Класс для построения детали
+    /// </summary>
     public class GearBuilder
     {
+        /// <summary>
+        /// Список параметров детали
+        /// </summary>
         private double[] _list = new double[0];
 
+        /// <summary>
+        /// Конструктор с параметром
+        /// </summary>
+        /// <param name="list">Список параметров детали</param>
         public GearBuilder(params double[] list)
         {
             for (int i = 0; i < list.Length; i++)
@@ -15,18 +25,18 @@ namespace PluginForKompas
             }
         }
 
+        /// <summary>
+        /// Создание нового документа для построения детали
+        /// </summary>
         public void New()
         {
             KompasApp.CreateNewDoc();
             DoDetail();
         }
 
-        public void Update()
-        {
-            KompasApp.GetActiveDoc();
-            DoDetail();
-        }
-
+        /// <summary>
+        /// Метод, который пошагово строит деталь
+        /// </summary>
         private void DoDetail()
         {
             ///окружность выступов

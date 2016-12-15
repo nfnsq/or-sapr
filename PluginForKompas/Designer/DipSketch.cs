@@ -5,8 +5,17 @@ using System.Windows.Forms;
 
 namespace PluginForKompas
 {
+    /// <summary>
+    /// Класс для нарисования эскиза выреза
+    /// </summary>
     public static class DipSketch
     {
+        /// <summary>
+        /// Метод рисует эскиз в виде части сектора
+        /// </summary>
+        /// <param name="m">Модуль жесткости шестерни</param>
+        /// <param name="z">Количество зубьев</param>
+        /// <param name="k">Тольщина ребер жесткости</param>
         public static void DrawDipSketch(double m, double z, double k)
         {
             double a0 = KompasApp.mat.ksAngle(0, 0, 1, 0);
@@ -30,10 +39,10 @@ namespace PluginForKompas
                 p2.y = Math.Sin(54 * Math.PI / 180) * m * z;
 
                 ksMathPointParam pA = (ksMathPointParam)KompasApp.kompas.GetParamStruct(mathPoint);
-                GetPointIntersect.LinArc(p1.x, p1.y, p2.x, p2.y, 0.9 * m * (z - 2.5) / 2, a0, a180, pA);
+                PointIntersect.LinArc(p1.x, p1.y, p2.x, p2.y, 0.9 * m * (z - 2.5) / 2, a0, a180, pA);
 
                 ksMathPointParam pB = (ksMathPointParam)KompasApp.kompas.GetParamStruct(mathPoint);
-                GetPointIntersect.LinArc(p1.x, p1.y, p2.x, p2.y, m * (z + 2) / 8, a0, a180, pB);
+                PointIntersect.LinArc(p1.x, p1.y, p2.x, p2.y, m * (z + 2) / 8, a0, a180, pB);
 
                 doc.ksPoint(pB.x, pB.y, 1);
                 ksMathPointParam pC = (ksMathPointParam)KompasApp.kompas.GetParamStruct(mathPoint);
@@ -55,7 +64,8 @@ namespace PluginForKompas
             }
             catch
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Dip sketch wasn't builded.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

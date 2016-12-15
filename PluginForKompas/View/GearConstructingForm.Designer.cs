@@ -75,6 +75,7 @@
             // 
             // buildButton
             // 
+            this.buildButton.Enabled = false;
             this.buildButton.Location = new System.Drawing.Point(241, 313);
             this.buildButton.Name = "buildButton";
             this.buildButton.Size = new System.Drawing.Size(75, 23);
@@ -160,26 +161,28 @@
             this.centerHoleDiamTextBox.Name = "centerHoleDiamTextBox";
             this.centerHoleDiamTextBox.Size = new System.Drawing.Size(44, 20);
             this.centerHoleDiamTextBox.TabIndex = 10;
+            this.centerHoleDiamTextBox.TextChanged += new System.EventHandler(this.centerHoleDiamTextBox_TextChanged);
             this.centerHoleDiamTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.centerHoleDiamTextBox_Validating);
-            this.centerHoleDiamTextBox.Validated += new System.EventHandler(this.centerHoleDiamTextBox_Validated);
             // 
             // rigidityUnitTextBox
             // 
+            this.rigidityUnitTextBox.Enabled = false;
             this.rigidityUnitTextBox.Location = new System.Drawing.Point(252, 45);
             this.rigidityUnitTextBox.Name = "rigidityUnitTextBox";
             this.rigidityUnitTextBox.Size = new System.Drawing.Size(44, 20);
             this.rigidityUnitTextBox.TabIndex = 9;
+            this.rigidityUnitTextBox.TextChanged += new System.EventHandler(this.rigidityUnitTextBox_TextChanged);
             this.rigidityUnitTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.rigidityUnitTextBox_Validating);
-            this.rigidityUnitTextBox.Validated += new System.EventHandler(this.rigidityUnitTextBox_Validated);
             // 
             // teethCountTextBox
             // 
+            this.teethCountTextBox.Enabled = false;
             this.teethCountTextBox.Location = new System.Drawing.Point(252, 19);
             this.teethCountTextBox.Name = "teethCountTextBox";
             this.teethCountTextBox.Size = new System.Drawing.Size(44, 20);
             this.teethCountTextBox.TabIndex = 8;
+            this.teethCountTextBox.TextChanged += new System.EventHandler(this.teethCountTextBox_TextChanged);
             this.teethCountTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.teethCountTextBox_Validating);
-            this.teethCountTextBox.Validated += new System.EventHandler(this.teethCountTextBox_Validated);
             // 
             // hexagonDepthLabel
             // 
@@ -262,7 +265,7 @@
             this.Controls.Add(this.buildButton);
             this.Controls.Add(this.kompasCheckGroupBox);
             this.Name = "GearConstructingForm";
-            this.Text = "Form1";
+            this.Text = "Gear Creator";
             this.kompasCheckGroupBox.ResumeLayout(false);
             this.kompasCheckGroupBox.PerformLayout();
             this.dataGroupBox.ResumeLayout(false);

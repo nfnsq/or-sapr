@@ -1,11 +1,19 @@
 ﻿using Kompas6API5;
 using System.Windows.Forms;
 using Kompas6Constants;
+using System.Windows.Forms;
 
 namespace PluginForKompas
 {
+    /// <summary>
+    ///  Класс рисования эскиза правильного шестиугольника
+    /// </summary>
     public static class HexagonSketch
     {
+        /// <summary>
+        /// Метод создает эскиз правильного шестиугольника
+        /// </summary>
+        /// <param name="rad">Радиус описанной окружности шестиугольника</param>
         public static void DrawHexagon(double rad)
         {
             try
@@ -26,7 +34,8 @@ namespace PluginForKompas
             }
             catch
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Hexagon sketch wasn't create.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
