@@ -1,6 +1,5 @@
 ﻿using Kompas6API5;
 using Kompas6Constants3D;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
@@ -16,7 +15,7 @@ namespace PluginForKompas
         /// <param name="x">координата х ребра</param>
         /// <param name="y">координата у ребра</param>
         /// <param name="z">координата z ребра</param>
-        public static void Create(double dist, double x, double y, double z)
+        public static bool Create(double dist, double x, double y, double z)
         {
             try
             {
@@ -29,18 +28,18 @@ namespace PluginForKompas
                     if (chDef != null)
                     {
                         chDef.tangent = true;
-                        bool q = chDef.SetChamferParam(false, dist, dist);
+                        chDef.SetChamferParam(false, dist, dist);
                         ksEntityCollection chamferCollection = (ksEntityCollection)chDef.array();
                         chamferCollection.Clear();
-                        bool p = chamferCollection.Add(edge.GetByIndex(0));
-                        bool k = chamfer.Create();
+                        chamferCollection.Add(edge.GetByIndex(0));
+                        chamfer.Create();
                     }
                 }
+                return true;
             }
             catch
             {
-                MessageBox.Show("Chamfer wasn't builded.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

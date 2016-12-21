@@ -21,7 +21,7 @@ namespace PluginForKompas
         /// <param name="a1">Начальный угол дуги</param>
         /// <param name="a2">Конечный угол дуги</param>
         /// <param name="par">Выходные данные</param>
-        public static void LinArc(double x1, double y1, double x2, double y2,
+        public static bool LinArc(double x1, double y1, double x2, double y2,
                                                     double rad, double a1, double a2,
                                                     ksMathPointParam par)
         {
@@ -36,11 +36,11 @@ namespace PluginForKompas
 
                     arr.ksGetArrayItem(0, par);
                 }
+                return true;
             }
             catch
             {
-                MessageBox.Show("Point wasn't found.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 
@@ -58,7 +58,7 @@ namespace PluginForKompas
         /// <param name="a21">Начальый угол дуги2</param>
         /// <param name="a22">Конечный угол дуги2</param>
         /// <param name="par">Выходные параметры</param>
-        public static void ArcArc(double x1, double y1, double rad1, double a11, double a12,
+        public static bool ArcArc(double x1, double y1, double rad1, double a11, double a12,
                                                     double x2, double y2, double rad2, double a21, double a22,
                                                     ksMathPointParam par)
         {
@@ -75,11 +75,11 @@ namespace PluginForKompas
                         );
                     arr.ksGetArrayItem(0, par);
                 }
+                return true;
             }
             catch
             {
-                MessageBox.Show("Point wasn't found.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

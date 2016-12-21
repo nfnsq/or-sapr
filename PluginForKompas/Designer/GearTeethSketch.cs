@@ -1,8 +1,6 @@
 ﻿using System;
 using Kompas6Constants;
 using Kompas6API5;
-using KAPITypes;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
@@ -16,7 +14,7 @@ namespace PluginForKompas
         /// </summary>
         /// <param name="z">Количетсво зубьев</param>
         /// <param name="m">Модуль жесткости</param>
-        public static void DrawGearTeeth(double z, double m)
+        public static bool DrawGearTeeth(double z, double m)
         {
             try
             {
@@ -105,11 +103,11 @@ namespace PluginForKompas
                 doc.ksLineSeg(p4s.x, p4s.y, pD.x, pD.y, 1);
 
                 def.EndEdit();
+                return true;
             }
             catch
             {
-                MessageBox.Show("Teeth sketch wasn't create.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

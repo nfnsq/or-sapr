@@ -1,6 +1,5 @@
 ﻿using Kompas6Constants3D;
 using Kompas6API5;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
@@ -14,7 +13,7 @@ namespace PluginForKompas
         /// по концентрической окружности относительно оси OY
         /// </summary>
         /// <param name="count">Количество копий</param>
-        public static void CreateOperationCircPartArray(int count)
+        public static bool CreateOperationCircPartArray(int count)
         {
             try
             {
@@ -39,12 +38,11 @@ namespace PluginForKompas
                         circCopy.Create();
                     }
                 }
+                return true;
             }
             catch
             {
-                MessageBox.Show("Copies weren't builded.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                return false;
             }
         }
 
@@ -53,7 +51,7 @@ namespace PluginForKompas
         /// по концентрической окружности относительно оси OY
         /// </summary>
         /// <param name="count"></param>
-        public static void CreateChamferCircPartArray(int count)
+        public static bool CreateChamferCircPartArray(int count)
         {
             try
             {
@@ -84,11 +82,11 @@ namespace PluginForKompas
                         circCopy.Create();
                     }
                 }
+                return true;
             }
             catch
             {
-                MessageBox.Show("Copies weren't builded.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

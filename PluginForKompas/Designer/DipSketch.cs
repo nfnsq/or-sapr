@@ -1,7 +1,6 @@
 ﻿using System;
 using Kompas6API5;
 using Kompas6Constants;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
@@ -16,7 +15,7 @@ namespace PluginForKompas
         /// <param name="m">Модуль жесткости шестерни</param>
         /// <param name="z">Количество зубьев</param>
         /// <param name="k">Тольщина ребер жесткости</param>
-        public static void DrawDipSketch(double m, double z, double k)
+        public static bool DrawDipSketch(double m, double z, double k)
         {
             double a0 = KompasApp.mat.ksAngle(0, 0, 1, 0);
             double a180 = KompasApp.mat.ksAngle(0, 0, -1, 0);
@@ -61,11 +60,11 @@ namespace PluginForKompas
                 doc.ksLineSeg(pC.x, pC.y, pD.x, pD.y, 1);
 
                 def.EndEdit();
+                return true;
             }
             catch
             {
-                MessageBox.Show("Dip sketch wasn't builded.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

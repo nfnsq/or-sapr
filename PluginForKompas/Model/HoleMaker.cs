@@ -1,6 +1,5 @@
 ﻿using Kompas6API5;
 using Kompas6Constants3D;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
@@ -14,7 +13,7 @@ namespace PluginForKompas
         /// последнего созданного эскиза
         /// </summary>
         /// <param name="depth">Глубина выдавливания</param>
-        static public void CutExtrusion(double depth)
+        public static bool CutExtrusion(double depth)
         {
             try
             {
@@ -35,11 +34,11 @@ namespace PluginForKompas
                     entityCutExtr.Create();
                     entityCutExtr.Update();
                 }
+                return true;
             }
             catch
             {
-                MessageBox.Show("Operation cut extrusion wasn't builded.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

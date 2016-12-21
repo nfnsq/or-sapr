@@ -23,15 +23,24 @@ namespace PluginForKompas
                 Array.Resize<double>(ref _list, i + 1);
                 this._list[i] = list[i];
             }
+
         }
 
         /// <summary>
         /// Создание нового документа для построения детали
         /// </summary>
-        public void New()
+        public bool New()
         {
-            KompasApp.CreateNewDoc();
-            DoDetail();
+            try
+            {
+                KompasApp.CreateNewDoc();
+                DoDetail();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

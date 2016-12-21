@@ -1,6 +1,5 @@
 ﻿using Kompas6Constants3D;
 using Kompas6API5;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
@@ -25,8 +24,6 @@ namespace PluginForKompas
             }
             catch
             {
-                MessageBox.Show("Sketch wasn't create.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }

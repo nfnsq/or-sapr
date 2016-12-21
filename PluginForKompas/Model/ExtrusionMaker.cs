@@ -1,20 +1,19 @@
 ﻿using Kompas6API5;
 using Kompas6Constants3D;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
     /// <summary>
     /// Класс операции выдавливания
     /// </summary>
-    static public class ExtrusionMaker
+    public static class ExtrusionMaker
     {
         /// <summary>
         /// Метод выполняет операцию выдавливания 
         /// для последнего созданного эскиза
         /// </summary>
         /// <param name="depth">Глубина выдавливания</param>
-        static public void DoOperationExtrusion(double depth)
+        public static bool DoOperationExtrusion(double depth)
         {
             try
             {
@@ -35,11 +34,11 @@ namespace PluginForKompas
                     entityExtr.Create();
                     entityExtr.Update();
                 }
+                return true;
             }
             catch
             {
-                MessageBox.Show("Operation extrusion wasn't builded.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

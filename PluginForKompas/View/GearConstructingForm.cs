@@ -9,8 +9,8 @@ namespace View
 {
     public partial class GearConstructingForm : Form
     {
-        private static double rigidity = 0;
-        private static double teethCount = 0;
+        private double rigidity = 0;
+        private double teethCount = 0;
 
         public GearConstructingForm()
         {
