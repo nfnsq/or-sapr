@@ -15,12 +15,12 @@ namespace PluginForKompas
         /// <param name="x">координата х ребра</param>
         /// <param name="y">координата у ребра</param>
         /// <param name="z">координата z ребра</param>
-        public static bool Create(double dist, double x, double y, double z)
+        public static bool Create(double dist, Point3d coor)
         {
             try
             {
                 ksEntityCollection edge = (ksEntityCollection)KompasApp.part.EntityCollection((short)Obj3dType.o3d_edge);
-                if ((edge != null) && (edge.SelectByPoint(x, y, z)) && (edge.GetCount() != 0))
+                if ((edge != null) && (edge.SelectByPoint(coor.x, coor.y, coor.z)) && (edge.GetCount() != 0))
                 {
                     ksEntity chamfer = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_chamfer);
                     ksChamferDefinition chDef = (ksChamferDefinition)chamfer.GetDefinition();

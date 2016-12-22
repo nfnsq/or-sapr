@@ -76,6 +76,10 @@
       <HintPath>..\..\..\Program Files\ASCON\KOMPAS-3D V16\SDK\C#\Common\VCHATCHLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CircularCopyMaker.cs" />
@@ -93,6 +97,13 @@
       <Project>{2d6e1e21-48cc-4c51-b77e-72885a64ba53}</Project>
       <Name>Initialization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Parameter\Parameter.csproj">
+      <Project>{96f014c9-9b71-43b7-aa09-89939bd7b68b}</Project>
+      <Name>Parameter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

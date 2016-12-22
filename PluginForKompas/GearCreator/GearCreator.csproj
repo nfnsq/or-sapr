@@ -32,12 +32,17 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GearBuilder.cs" />
@@ -109,6 +114,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataControl\DataControl.csproj">
+      <Project>{8d31939f-2c8b-4e9c-bc87-1768a3c85ac2}</Project>
+      <Name>DataControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Designer\SketchDesign.csproj">
       <Project>{e270dbe4-2768-414e-a521-d8532d8286ee}</Project>
       <Name>SketchDesign</Name>
@@ -121,6 +130,13 @@
       <Project>{2be4a84a-e7f7-4d70-97fa-a4c2bf659a47}</Project>
       <Name>Kompas-api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Parameter\Parameter.csproj">
+      <Project>{96f014c9-9b71-43b7-aa09-89939bd7b68b}</Project>
+      <Name>Parameter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

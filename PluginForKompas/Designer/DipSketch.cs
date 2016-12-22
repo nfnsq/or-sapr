@@ -1,6 +1,7 @@
 ﻿using System;
 using Kompas6API5;
 using Kompas6Constants;
+using System.Windows;
 
 namespace PluginForKompas
 {
@@ -22,6 +23,10 @@ namespace PluginForKompas
             double x;
             double y;
             double l = k / 2;
+            ///диаметр большей дуги углубления
+            double D1 = 0.9 * m * (z - 2.5) / 2;
+            ///диаметр меньшей дуги углубления
+            double D2 = m * (z + 2) / 8;
             try
             {
                 ksSketchDefinition def = SketchCreator.MakeSketch();
@@ -29,19 +34,27 @@ namespace PluginForKompas
                 short mathPoint = (short)StructType2DEnum.ko_MathPointParam;
 
                 ksMathPointParam p1 = (ksMathPointParam)KompasApp.kompas.GetParamStruct(mathPoint);
+                ///толщина ребер жесткости по координатам
                 p1.x = -l / Math.Sin(54 * Math.PI / 180);
                 p1.y = 0;
 
+                ///координаты точки на ребре жесткости
                 ksMathPointParam p2 = (ksMathPointParam)KompasApp.kompas.GetParamStruct(mathPoint);
                 p2.x = (Math.Cos(54 * Math.PI / 180) * m * z)
                     - (l / Math.Sin(54 * Math.PI / 180));
                 p2.y = Math.Sin(54 * Math.PI / 180) * m * z;
+                Point point1 = new Point(p1.x, p1.y);
+                Point point2 = new Point(p2.x, p2.y);
 
+                ///координаты точки пересечения большей дуги углубления 
+                ///и прямой проходящей вдоль ребра жесткости 
                 ksMathPointParam pA = (ksMathPointParam)KompasApp.kompas.GetParamStruct(mathPoint);
-                PointIntersect.LinArc(p1.x, p1.y, p2.x, p2.y, 0.9 * m * (z - 2.5) / 2, a0, a180, pA);
+                PointIntersect.LinArc(point1, point2, D1, a0, a180, pA);
 
+                ///координаты точки пересечения меньшей дуги углубления 
+                ///и прямой проходящей вдоль ребра жесткости 
                 ksMathPointParam pB = (ksMathPointParam)KompasApp.kompas.GetParamStruct(mathPoint);
-                PointIntersect.LinArc(p1.x, p1.y, p2.x, p2.y, m * (z + 2) / 8, a0, a180, pB);
+                PointIntersect.LinArc(point1, point2, D2, a0, a180, pB);
 
                 doc.ksPoint(pB.x, pB.y, 1);
                 ksMathPointParam pC = (ksMathPointParam)KompasApp.kompas.GetParamStruct(mathPoint);
@@ -54,8 +67,8 @@ namespace PluginForKompas
                 pD.x = x;
                 pD.y = y;
 
-                doc.ksArcByPoint(0, 0, 0.9 * m * (z - 2.5) / 2, pA.x, pA.y, pC.x, pC.y, 1, 1);
-                doc.ksArcByPoint(0, 0, m * (z + 2) / 8, pB.x, pB.y, pD.x, pD.y, 1, 1);
+                doc.ksArcByPoint(0, 0, D1, pA.x, pA.y, pC.x, pC.y, 1, 1);
+                doc.ksArcByPoint(0, 0, D2, pB.x, pB.y, pD.x, pD.y, 1, 1);
                 doc.ksLineSeg(pA.x, pA.y, pB.x, pB.y, 1);
                 doc.ksLineSeg(pC.x, pC.y, pD.x, pD.y, 1);
 

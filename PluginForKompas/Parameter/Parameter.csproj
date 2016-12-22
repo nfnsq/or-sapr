@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{338213B9-238A-4476-8F47-AB09D5D56329}</ProjectGuid>
+    <ProjectGuid>{96F014C9-9B71-43B7-AA09-89939BD7B68B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTests</RootNamespace>
-    <AssemblyName>UnitTests</AssemblyName>
+    <RootNamespace>Parameter</RootNamespace>
+    <AssemblyName>Parameter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\NUnit 2.6.4\bin\framework\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,22 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GearCreator\GearBuilderTest.cs" />
+    <Compile Include="Parameter.cs" />
+    <Compile Include="Point3d.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GearCreator\GearCreator.csproj">
-      <Project>{0b383148-64fe-4127-82ab-61c4e95f9324}</Project>
-      <Name>GearCreator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GlobalObject\Initialization.csproj">
-      <Project>{2d6e1e21-48cc-4c51-b77e-72885a64ba53}</Project>
-      <Name>Initialization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Parameter\Parameter.csproj">
-      <Project>{96f014c9-9b71-43b7-aa09-89939bd7b68b}</Project>
-      <Name>Parameter</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

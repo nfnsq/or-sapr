@@ -32,14 +32,14 @@
             this.kompasCheckBox = new System.Windows.Forms.CheckBox();
             this.buildButton = new System.Windows.Forms.Button();
             this.dataGroupBox = new System.Windows.Forms.GroupBox();
-            this.hexDipDepthTextBox = new System.Windows.Forms.TextBox();
-            this.stiffDepthTextBox = new System.Windows.Forms.TextBox();
-            this.stiffWidthTextBox = new System.Windows.Forms.TextBox();
-            this.hexDiamTextBox = new System.Windows.Forms.TextBox();
-            this.circHolesDiamTextBox = new System.Windows.Forms.TextBox();
-            this.centerHoleDiamTextBox = new System.Windows.Forms.TextBox();
-            this.rigidityUnitTextBox = new System.Windows.Forms.TextBox();
-            this.teethCountTextBox = new System.Windows.Forms.TextBox();
+            this.depth_of_the_hexagon_dip = new System.Windows.Forms.TextBox();
+            this.stiffener_depth = new System.Windows.Forms.TextBox();
+            this.stiffeners_width = new System.Windows.Forms.TextBox();
+            this.diameter_of_the_heaxagon_circumscribed_circle = new System.Windows.Forms.TextBox();
+            this.diameter_of_the_circumential_holes = new System.Windows.Forms.TextBox();
+            this.diameter_of_the_center_hole = new System.Windows.Forms.TextBox();
+            this.rigidity_of_geat_unit = new System.Windows.Forms.TextBox();
+            this.count_of_gear_teeth = new System.Windows.Forms.TextBox();
             this.hexagonDepthLabel = new System.Windows.Forms.Label();
             this.stiffenersDepthLabel = new System.Windows.Forms.Label();
             this.stiffenersWidthLabel = new System.Windows.Forms.Label();
@@ -86,14 +86,14 @@
             // 
             // dataGroupBox
             // 
-            this.dataGroupBox.Controls.Add(this.hexDipDepthTextBox);
-            this.dataGroupBox.Controls.Add(this.stiffDepthTextBox);
-            this.dataGroupBox.Controls.Add(this.stiffWidthTextBox);
-            this.dataGroupBox.Controls.Add(this.hexDiamTextBox);
-            this.dataGroupBox.Controls.Add(this.circHolesDiamTextBox);
-            this.dataGroupBox.Controls.Add(this.centerHoleDiamTextBox);
-            this.dataGroupBox.Controls.Add(this.rigidityUnitTextBox);
-            this.dataGroupBox.Controls.Add(this.teethCountTextBox);
+            this.dataGroupBox.Controls.Add(this.depth_of_the_hexagon_dip);
+            this.dataGroupBox.Controls.Add(this.stiffener_depth);
+            this.dataGroupBox.Controls.Add(this.stiffeners_width);
+            this.dataGroupBox.Controls.Add(this.diameter_of_the_heaxagon_circumscribed_circle);
+            this.dataGroupBox.Controls.Add(this.diameter_of_the_circumential_holes);
+            this.dataGroupBox.Controls.Add(this.diameter_of_the_center_hole);
+            this.dataGroupBox.Controls.Add(this.rigidity_of_geat_unit);
+            this.dataGroupBox.Controls.Add(this.count_of_gear_teeth);
             this.dataGroupBox.Controls.Add(this.hexagonDepthLabel);
             this.dataGroupBox.Controls.Add(this.stiffenersDepthLabel);
             this.dataGroupBox.Controls.Add(this.stiffenersWidthLabel);
@@ -109,80 +109,81 @@
             this.dataGroupBox.TabStop = false;
             this.dataGroupBox.Text = "Data";
             // 
-            // hexDipDepthTextBox
+            // depth_of_the_hexagon_dip
             // 
-            this.hexDipDepthTextBox.Enabled = false;
-            this.hexDipDepthTextBox.Location = new System.Drawing.Point(252, 149);
-            this.hexDipDepthTextBox.Name = "hexDipDepthTextBox";
-            this.hexDipDepthTextBox.Size = new System.Drawing.Size(44, 20);
-            this.hexDipDepthTextBox.TabIndex = 15;
-            this.hexDipDepthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.hexDipDepthTextBox_Validating);
+            this.depth_of_the_hexagon_dip.Enabled = false;
+            this.depth_of_the_hexagon_dip.Location = new System.Drawing.Point(252, 149);
+            this.depth_of_the_hexagon_dip.Name = "depth_of_the_hexagon_dip";
+            this.depth_of_the_hexagon_dip.Size = new System.Drawing.Size(44, 20);
+            this.depth_of_the_hexagon_dip.TabIndex = 15;
+            this.depth_of_the_hexagon_dip.Validating += new System.ComponentModel.CancelEventHandler(this.hexDipDepthTextBox_Validating);
             // 
-            // stiffDepthTextBox
+            // stiffener_depth
             // 
-            this.stiffDepthTextBox.Enabled = false;
-            this.stiffDepthTextBox.Location = new System.Drawing.Point(252, 201);
-            this.stiffDepthTextBox.Name = "stiffDepthTextBox";
-            this.stiffDepthTextBox.Size = new System.Drawing.Size(44, 20);
-            this.stiffDepthTextBox.TabIndex = 14;
-            this.stiffDepthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.stiffDepthTextBox_Validating);
+            this.stiffener_depth.Enabled = false;
+            this.stiffener_depth.Location = new System.Drawing.Point(252, 201);
+            this.stiffener_depth.Name = "stiffener_depth";
+            this.stiffener_depth.Size = new System.Drawing.Size(44, 20);
+            this.stiffener_depth.TabIndex = 14;
+            this.stiffener_depth.Validating += new System.ComponentModel.CancelEventHandler(this.stiffDepthTextBox_Validating);
             // 
-            // stiffWidthTextBox
+            // stiffeners_width
             // 
-            this.stiffWidthTextBox.Enabled = false;
-            this.stiffWidthTextBox.Location = new System.Drawing.Point(252, 175);
-            this.stiffWidthTextBox.Name = "stiffWidthTextBox";
-            this.stiffWidthTextBox.Size = new System.Drawing.Size(44, 20);
-            this.stiffWidthTextBox.TabIndex = 13;
-            this.stiffWidthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.stiffWidthTextBox_Validating);
+            this.stiffeners_width.Enabled = false;
+            this.stiffeners_width.Location = new System.Drawing.Point(252, 175);
+            this.stiffeners_width.Name = "stiffeners_width";
+            this.stiffeners_width.Size = new System.Drawing.Size(44, 20);
+            this.stiffeners_width.TabIndex = 13;
+            this.stiffeners_width.Validating += new System.ComponentModel.CancelEventHandler(this.stiffWidthTextBox_Validating);
             // 
-            // hexDiamTextBox
+            // diameter_of_the_heaxagon_circumscribed_circle
             // 
-            this.hexDiamTextBox.Enabled = false;
-            this.hexDiamTextBox.Location = new System.Drawing.Point(252, 123);
-            this.hexDiamTextBox.Name = "hexDiamTextBox";
-            this.hexDiamTextBox.Size = new System.Drawing.Size(44, 20);
-            this.hexDiamTextBox.TabIndex = 12;
-            this.hexDiamTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.hexDiamTextBox_Validating);
+            this.diameter_of_the_heaxagon_circumscribed_circle.Enabled = false;
+            this.diameter_of_the_heaxagon_circumscribed_circle.Location = new System.Drawing.Point(252, 123);
+            this.diameter_of_the_heaxagon_circumscribed_circle.Name = "diameter_of_the_heaxagon_circumscribed_circle";
+            this.diameter_of_the_heaxagon_circumscribed_circle.Size = new System.Drawing.Size(44, 20);
+            this.diameter_of_the_heaxagon_circumscribed_circle.TabIndex = 12;
+            this.diameter_of_the_heaxagon_circumscribed_circle.TextChanged += new System.EventHandler(this.hexDiamTextBox_TextChanged);
+            this.diameter_of_the_heaxagon_circumscribed_circle.Validating += new System.ComponentModel.CancelEventHandler(this.hexDiamTextBox_Validating);
             // 
-            // circHolesDiamTextBox
+            // diameter_of_the_circumential_holes
             // 
-            this.circHolesDiamTextBox.Enabled = false;
-            this.circHolesDiamTextBox.Location = new System.Drawing.Point(252, 97);
-            this.circHolesDiamTextBox.Name = "circHolesDiamTextBox";
-            this.circHolesDiamTextBox.Size = new System.Drawing.Size(44, 20);
-            this.circHolesDiamTextBox.TabIndex = 11;
-            this.circHolesDiamTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.circHolesDiamTextBox_Validating);
+            this.diameter_of_the_circumential_holes.Enabled = false;
+            this.diameter_of_the_circumential_holes.Location = new System.Drawing.Point(252, 97);
+            this.diameter_of_the_circumential_holes.Name = "diameter_of_the_circumential_holes";
+            this.diameter_of_the_circumential_holes.Size = new System.Drawing.Size(44, 20);
+            this.diameter_of_the_circumential_holes.TabIndex = 11;
+            this.diameter_of_the_circumential_holes.Validating += new System.ComponentModel.CancelEventHandler(this.circHolesDiamTextBox_Validating);
             // 
-            // centerHoleDiamTextBox
+            // diameter_of_the_center_hole
             // 
-            this.centerHoleDiamTextBox.Enabled = false;
-            this.centerHoleDiamTextBox.Location = new System.Drawing.Point(252, 71);
-            this.centerHoleDiamTextBox.Name = "centerHoleDiamTextBox";
-            this.centerHoleDiamTextBox.Size = new System.Drawing.Size(44, 20);
-            this.centerHoleDiamTextBox.TabIndex = 10;
-            this.centerHoleDiamTextBox.TextChanged += new System.EventHandler(this.centerHoleDiamTextBox_TextChanged);
-            this.centerHoleDiamTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.centerHoleDiamTextBox_Validating);
+            this.diameter_of_the_center_hole.Enabled = false;
+            this.diameter_of_the_center_hole.Location = new System.Drawing.Point(252, 71);
+            this.diameter_of_the_center_hole.Name = "diameter_of_the_center_hole";
+            this.diameter_of_the_center_hole.Size = new System.Drawing.Size(44, 20);
+            this.diameter_of_the_center_hole.TabIndex = 10;
+            this.diameter_of_the_center_hole.TextChanged += new System.EventHandler(this.centerHoleDiamTextBox_TextChanged);
+            this.diameter_of_the_center_hole.Validating += new System.ComponentModel.CancelEventHandler(this.centerHoleDiamTextBox_Validating);
             // 
-            // rigidityUnitTextBox
+            // rigidity_of_geat_unit
             // 
-            this.rigidityUnitTextBox.Enabled = false;
-            this.rigidityUnitTextBox.Location = new System.Drawing.Point(252, 45);
-            this.rigidityUnitTextBox.Name = "rigidityUnitTextBox";
-            this.rigidityUnitTextBox.Size = new System.Drawing.Size(44, 20);
-            this.rigidityUnitTextBox.TabIndex = 9;
-            this.rigidityUnitTextBox.TextChanged += new System.EventHandler(this.rigidityUnitTextBox_TextChanged);
-            this.rigidityUnitTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.rigidityUnitTextBox_Validating);
+            this.rigidity_of_geat_unit.Enabled = false;
+            this.rigidity_of_geat_unit.Location = new System.Drawing.Point(252, 45);
+            this.rigidity_of_geat_unit.Name = "rigidity_of_geat_unit";
+            this.rigidity_of_geat_unit.Size = new System.Drawing.Size(44, 20);
+            this.rigidity_of_geat_unit.TabIndex = 9;
+            this.rigidity_of_geat_unit.TextChanged += new System.EventHandler(this.rigidityUnitTextBox_TextChanged);
+            this.rigidity_of_geat_unit.Validating += new System.ComponentModel.CancelEventHandler(this.rigidityUnitTextBox_Validating);
             // 
-            // teethCountTextBox
+            // count_of_gear_teeth
             // 
-            this.teethCountTextBox.Enabled = false;
-            this.teethCountTextBox.Location = new System.Drawing.Point(252, 19);
-            this.teethCountTextBox.Name = "teethCountTextBox";
-            this.teethCountTextBox.Size = new System.Drawing.Size(44, 20);
-            this.teethCountTextBox.TabIndex = 8;
-            this.teethCountTextBox.TextChanged += new System.EventHandler(this.teethCountTextBox_TextChanged);
-            this.teethCountTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.teethCountTextBox_Validating);
+            this.count_of_gear_teeth.Enabled = false;
+            this.count_of_gear_teeth.Location = new System.Drawing.Point(252, 19);
+            this.count_of_gear_teeth.Name = "count_of_gear_teeth";
+            this.count_of_gear_teeth.Size = new System.Drawing.Size(44, 20);
+            this.count_of_gear_teeth.TabIndex = 8;
+            this.count_of_gear_teeth.TextChanged += new System.EventHandler(this.teethCountTextBox_TextChanged);
+            this.count_of_gear_teeth.Validating += new System.ComponentModel.CancelEventHandler(this.teethCountTextBox_Validating);
             // 
             // hexagonDepthLabel
             // 
@@ -280,14 +281,14 @@
         private System.Windows.Forms.Button buildButton;
         private System.Windows.Forms.CheckBox kompasCheckBox;
         private System.Windows.Forms.GroupBox dataGroupBox;
-        private System.Windows.Forms.TextBox hexDipDepthTextBox;
-        private System.Windows.Forms.TextBox stiffDepthTextBox;
-        private System.Windows.Forms.TextBox stiffWidthTextBox;
-        private System.Windows.Forms.TextBox hexDiamTextBox;
-        private System.Windows.Forms.TextBox circHolesDiamTextBox;
-        private System.Windows.Forms.TextBox centerHoleDiamTextBox;
-        private System.Windows.Forms.TextBox rigidityUnitTextBox;
-        private System.Windows.Forms.TextBox teethCountTextBox;
+        private System.Windows.Forms.TextBox depth_of_the_hexagon_dip;
+        private System.Windows.Forms.TextBox stiffener_depth;
+        private System.Windows.Forms.TextBox stiffeners_width;
+        private System.Windows.Forms.TextBox diameter_of_the_heaxagon_circumscribed_circle;
+        private System.Windows.Forms.TextBox diameter_of_the_circumential_holes;
+        private System.Windows.Forms.TextBox diameter_of_the_center_hole;
+        private System.Windows.Forms.TextBox rigidity_of_geat_unit;
+        private System.Windows.Forms.TextBox count_of_gear_teeth;
         private System.Windows.Forms.Label hexagonDepthLabel;
         private System.Windows.Forms.Label stiffenersDepthLabel;
         private System.Windows.Forms.Label stiffenersWidthLabel;

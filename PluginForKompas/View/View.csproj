@@ -154,6 +154,10 @@
       <Project>{2d6e1e21-48cc-4c51-b77e-72885a64ba53}</Project>
       <Name>Initialization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Parameter\Parameter.csproj">
+      <Project>{96f014c9-9b71-43b7-aa09-89939bd7b68b}</Project>
+      <Name>Parameter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
