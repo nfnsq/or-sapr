@@ -9,8 +9,8 @@ namespace View
 {
     public partial class GearConstructingForm : Form
     {
-        private static double rigidity = 0;
-        private static double teethCount = 0;
+        private double _rigidity = 0;
+        private double _teethCount = 0;
 
         public GearConstructingForm()
         {
@@ -27,8 +27,8 @@ namespace View
             if (kompasCheckBox.Checked)
             {
                 KompasApp.GetActiveApp();
-                teethCountTextBox.Enabled = true;
-                rigidityUnitTextBox.Enabled = true;
+                countOfGearTeethTextBox.Enabled = true;
+                rigidityOfGeatUnitTextBox.Enabled = true;
                 buildButton.Enabled = true;
             }
 
@@ -60,23 +60,31 @@ namespace View
         /// <param name="e"></param>
         private void buildButton_Click(object sender, EventArgs e)
         {
-            double[] param = ReadData();
+            Parameter[] param = new Parameter[0];
+                param = ReadData();
             if (param != null)
             {
-                GearBuilder Gear = new GearBuilder(param);
-                Gear.New();
+                try
+                {
+                    GearBuilder Gear = new GearBuilder(param);
+                    Gear.New();
+                }
+                catch
+                {
+                    MessageBox.Show("Object wasn't created.");
+                }
             }
         }
 
         /// <summary>
         /// Метод возвращает динамический массив введенных данных 
         /// </summary>
-        private double[] ReadData()
+        private Parameter[] ReadData()
         {
             try
             {
                 int length = 0;
-                double[] parameters = new double[length];
+                Parameter[] parameters = new Parameter[length];
         
                 foreach (Control groupBoxData in this.Controls)
                 {
@@ -88,9 +96,10 @@ namespace View
                             if (textbox is TextBox)
                             {
                                 length++;
-                                Array.Resize<double>(ref parameters, length);
-                                parameters[length - 1] = double.Parse(textbox.Text,
+                                Array.Resize<Parameter>(ref parameters, length);
+                                parameters[length - 1].Value = double.Parse(textbox.Text,
                                     CultureInfo.InvariantCulture);
+                                parameters[length - 1].Descrpiption = textbox.Name;
                             }
                         }
                     }
@@ -113,170 +122,69 @@ namespace View
         /// <param name="regex">Регулярное выражение</param>
         /// <param name="text">Проверяемая строка</param>
         /// <param name="e">Данные отменяемого события</param>
-        private void CheckData(Regex regex, string text, CancelEventArgs e)
+        private void DataValidating(object sender, CancelEventArgs e)
         {
-            if ((regex.IsMatch(text) != true) && (text != ""))
+            Regex regex = new Regex("^[0-9]+$");
+            if ((regex.IsMatch(((TextBox)sender).Text) != true) && (((TextBox)sender).Text != ""))
             {
                 MessageBox.Show("Invalid data. Please, try again.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
-                text = "";
+                ((TextBox)sender).Text = "";
             }
-        }
-
-        /// <summary>
-        /// Метод для проверки зависимых от основных параметров шестерни
-        /// </summary>
-        /// <param name="text">Проверяемая строка</param>
-        /// <param name="a">Минимально допустимое значение</param>
-        /// <param name="b">Максимально допустимое значение</param>
-        /// <param name="e">Данные отменяемого события</param>
-        private void CheckData(string text, double a, double b, CancelEventArgs e)
-        {
-            Regex regex = new Regex("^[1-9]{1}[0-9]{0,2}$");
-            if ((regex.IsMatch(text) != true) && (text != ""))
-            {
-                MessageBox.Show("Format exception. Please, try again.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
-            else
-            {
-                if (text != "")
-                {
-                    double d = double.Parse(text);
-                    if ((d < a) || (d > b))
-                    {
-                        MessageBox.Show("Format overflow. Please, try again.", "Error",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        e.Cancel = true;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Метод проверяет параметры глубины вырезов
-        /// </summary>
-        /// <param name="text">Проверяемая строка</param>
-        /// <param name="e">Данные отменяемого события</param>
-        private void CheckDepth(string text, CancelEventArgs e)
-        {
-            double min = 0;
-            double max = rigidity * teethCount * 0.1;
-            CheckData(text, min, max, e);
-        }
-
-        private void teethCountTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            Regex regex = new Regex("^[1-9]{1}[0-9]{0,1}$");
-            CheckData(regex, teethCountTextBox.Text, e);
-        }
-
-        private void rigidityUnitTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            Regex regex = new Regex("^[1-5]{1}[0-9]{0,1}\\.{0,1}[0-9]{0,1}5{0,1}$");
-            CheckData(regex, rigidityUnitTextBox.Text, e);
-        }
-
-        private void centerHoleDiamTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            double min = 5;
-            double max = (0.25 * rigidity * (teethCount + 2) - 10) * Math.Cos(30 * Math.PI / 180);
-            CheckData(centerHoleDiamTextBox.Text, min, max, e);
-        }
-
-        private void circHolesDiamTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            double min = 5;
-            double max = 0.9 * rigidity * (teethCount - 2.5) - 0.24 * rigidity * (teethCount + 2) - 10;
-            CheckData(circHolesDiamTextBox.Text, min, max, e);
-        }
-
-        private void hexDiamTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            double d1 = double.Parse(centerHoleDiamTextBox.Text);
-            double min = d1 / Math.Cos(30 * Math.PI / 180);
-            double max = 0.25 * rigidity * (teethCount + 2) - 10;
-            CheckData(hexDiamTextBox.Text, min, max, e);
-        }
-
-        private void hexDipDepthTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckDepth(hexDipDepthTextBox.Text, e);
-        }
-
-        private void stiffWidthTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            double min = 12;
-            double max = 22;
-            CheckData(stiffWidthTextBox.Text, min, max, e);
-        }
-
-        private void stiffDepthTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckDepth(hexDipDepthTextBox.Text, e);
         }
 
         private void enableTextBoxs()
         {
-            if ((rigidity != 0) && (teethCount != 0))
+            if ((_rigidity != 0) && (_teethCount != 0))
             {
-                centerHoleDiamTextBox.Enabled = true;
-                circHolesDiamTextBox.Enabled = true;
-                stiffDepthTextBox.Enabled = true;
-                stiffWidthTextBox.Enabled = true;
-                hexDipDepthTextBox.Enabled = true;
+                diameterOfTheCenterHoleTextBox.Enabled = true;
+                diameterOfTheCircumentialHolesTextBox.Enabled = true;
+                stiffenerDepthTextBox.Enabled = true;
+                stiffenersWidthTextBox.Enabled = true;
+                depthOfTheHexagonDipTextBox.Enabled = true;
             }
         }
 
         private void disableTextBoxs()
         {
-            centerHoleDiamTextBox.Enabled = false;
-            circHolesDiamTextBox.Enabled = false;
-            stiffDepthTextBox.Enabled = false;
-            stiffWidthTextBox.Enabled = false;
-            hexDipDepthTextBox.Enabled = false;
+            diameterOfTheCenterHoleTextBox.Enabled = false;
+            diameterOfTheCircumentialHolesTextBox.Enabled = false;
+            stiffenerDepthTextBox.Enabled = false;
+            stiffenersWidthTextBox.Enabled = false;
+            depthOfTheHexagonDipTextBox.Enabled = false;
         }
 
-        private void teethCountTextBox_TextChanged(object sender, EventArgs e)
+        private void ChangeEnable(object sender, EventArgs e)
         {
-            if (Regex.IsMatch(teethCountTextBox.Text, "^[1-9]{1}[0-9]{0,1}$"))
+
+            if (((TextBox)sender) == countOfGearTeethTextBox)
             {
-                teethCount = double.Parse(teethCountTextBox.Text);
-                enableTextBoxs();
+                if (Regex.IsMatch(((TextBox)sender).Text, "^[0-9]+$"))
+                {
+                    _teethCount = double.Parse(((TextBox)sender).Text);
+                    enableTextBoxs();
+                }
+                else disableTextBoxs();
             }
-            else
+
+            if (((TextBox)sender) == rigidityOfGeatUnitTextBox)
             {
-                disableTextBoxs();
+                if (Regex.IsMatch(((TextBox)sender).Text, "^[0-9]+$"))
+                {
+                    _rigidity = double.Parse(((TextBox)sender).Text);
+                    enableTextBoxs();
+                }
+                else disableTextBoxs();
+            }
+            if (((TextBox)sender) == diameterOfTheCenterHoleTextBox)
+            {
+                if (Regex.IsMatch(((TextBox)sender).Text, "^[0-9]+$"))
+                {
+                    diameterOfTheHeaxagonCircumscribedCircleTextBox.Enabled = true;
+                }
+                else diameterOfTheHeaxagonCircumscribedCircleTextBox.Enabled = false;
             }
         }
-        
-        private void rigidityUnitTextBox_TextChanged(object sender, EventArgs e)
-
-        {
-            if (Regex.IsMatch(rigidityUnitTextBox.Text, "^[1-5]{1}[0-9]{0,1}\\.{0,1}[0-9]{0,1}5{0,1}$"))
-            {
-                rigidity = double.Parse(rigidityUnitTextBox.Text);
-                enableTextBoxs();
-            }
-            else
-            {
-                disableTextBoxs();
-            }
-        }
-
-        private void centerHoleDiamTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (Regex.IsMatch(centerHoleDiamTextBox.Text, "^[1-9]{1}[0-9]{0,2}$"))
-            {
-                hexDiamTextBox.Enabled = true;
-            }
-            else
-            {
-                hexDiamTextBox.Enabled = false;
-            }
-        }
-
     }
 }

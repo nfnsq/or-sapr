@@ -6,16 +6,13 @@ using System.Runtime.InteropServices;
 
 namespace PluginForKompas
 {
-    /// <summary>
-    /// Класс который создает обязательные объекты КОМПАС
-    /// </summary>
-    public static class KompasApp
+    public class KompasApp
     {
-        public static KompasObject kompas;
-        public static ksDocument3D doc3d;
-        public static ksPart part;
-        public static ksEntity basePlane;
-        public static ksMathematic2D mat;
+        public static KompasObject Kompas;
+        public static ksDocument3D Doc3d;
+        public static ksPart Part;
+        public static ksEntity BasePlane;
+        public static ksMathematic2D Mat;
 
         /// <summary>
         /// Метод создает новый документ трехмерной 
@@ -26,13 +23,13 @@ namespace PluginForKompas
         {
             try
             {
-                doc3d = (ksDocument3D)kompas.Document3D();
-                doc3d.fileName = "Gear";
-                doc3d.Create();
-                doc3d.UpdateDocumentParam();
-                part = (ksPart)doc3d.GetPart((short)Part_Type.pTop_Part);
-                basePlane = (ksEntity)part.GetDefaultEntity((short)Obj3dType.o3d_planeXOZ);
-                mat = (ksMathematic2D)kompas.GetMathematic2D();
+                Doc3d = (ksDocument3D)Kompas.Document3D();
+                Doc3d.fileName = "Gear";
+                Doc3d.Create();
+                Doc3d.UpdateDocumentParam();
+                Part = (ksPart)Doc3d.GetPart((short)Part_Type.pTop_Part);
+                BasePlane = (ksEntity)Part.GetDefaultEntity((short)Obj3dType.o3d_planeXOZ);
+                Mat = (ksMathematic2D)Kompas.GetMathematic2D();
             }
             catch
             {
@@ -47,22 +44,22 @@ namespace PluginForKompas
         /// </summary>
         public static void GetActiveApp()
         {
-            if (kompas == null)
+            if (Kompas == null)
             {
                 string progID = "KOMPAS.Application.5";
                 try
                 {
-                    kompas = (KompasObject)Marshal.GetActiveObject(progID);
+                    Kompas = (KompasObject)Marshal.GetActiveObject(progID);
                 }
                 catch (COMException)
                 {
                     Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");
-                    kompas = (KompasObject)Activator.CreateInstance(t);
+                    Kompas = (KompasObject)Activator.CreateInstance(t);
                 }
-                if (kompas != null)
+                if (Kompas != null)
                 {
-                    kompas.Visible = true;
-                    kompas.ActivateControllerAPI();
+                    Kompas.Visible = true;
+                    Kompas.ActivateControllerAPI();
                 }
             }
         }
@@ -72,25 +69,25 @@ namespace PluginForKompas
         /// </summary>
         public static void Exit()
         {
-            kompas.Quit();
+            Kompas.Quit();
         }
-    
+
         /// <summary>
         /// Метод смещает базовую плоскость по оси OY на заданное расстояние
         /// </summary>
         /// <param name="offset">Расстояние от базовой плоскости до смещеннной</param>
-        public static void MovingBasePlaneByYAxis(double offset)
+        public static void MovingBasePlaneByYAxis(double offset, bool direction)
         {
-            ksEntity plane = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_planeOffset);
+            ksEntity plane = (ksEntity)Part.NewEntity((short)Obj3dType.o3d_planeOffset);
             ksPlaneOffsetDefinition planeDef = (ksPlaneOffsetDefinition)plane.GetDefinition();
             if (planeDef != null)
             {
-                planeDef.SetPlane(basePlane);
-                planeDef.direction = true;
+                planeDef.SetPlane(BasePlane);
+                planeDef.direction = direction;
                 planeDef.offset = offset;
                 plane.Create();
             }
-            basePlane = plane;
+            BasePlane = plane;
         }
     }
 }

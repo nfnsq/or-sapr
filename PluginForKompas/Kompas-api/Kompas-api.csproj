@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PluginForKompas</RootNamespace>
-    <AssemblyName>Model</AssemblyName>
+    <AssemblyName>Kompas-api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -76,12 +76,21 @@
       <HintPath>..\..\..\Program Files\ASCON\KOMPAS-3D V16\SDK\C#\Common\VCHATCHLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircleSketch.cs" />
     <Compile Include="CircularCopyMaker.cs" />
     <Compile Include="ChamferMaker.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DipSketch.cs" />
+    <Compile Include="GearTeethSketch.cs" />
+    <Compile Include="HexagonSketch.cs" />
+    <Compile Include="KompasApp.cs" />
     <Compile Include="PointIntersect.cs" />
     <Compile Include="HoleMaker.cs" />
     <Compile Include="ExtrusionMaker.cs" />
@@ -89,9 +98,12 @@
     <Compile Include="SketchCreator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GlobalObject\Initialization.csproj">
-      <Project>{2d6e1e21-48cc-4c51-b77e-72885a64ba53}</Project>
-      <Name>Initialization</Name>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Global\Global.csproj">
+      <Project>{10cca96c-60bc-4669-8905-8dc38d512dc9}</Project>
+      <Name>Global</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

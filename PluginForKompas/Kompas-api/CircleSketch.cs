@@ -1,6 +1,5 @@
 ﻿using Kompas6API5;
-using System.Windows.Forms;
-using Kompas6Constants3D;
+using System.Windows;
 
 namespace PluginForKompas
 {
@@ -16,21 +15,19 @@ namespace PluginForKompas
         /// <param name="centerCoordinateY">Координата у центра окружности</param>
         /// <param name="radius">Радиус окружности</param>
         /// <param name="lineType">Стиль линии</param>
-        public static void DrawCircle(double centerCoordinateX,
-                                          double centerCoordinateY, 
-                                          double radius, int lineType)
+        public static bool DrawCircle(Point coor, double radius, int lineType)
         {
             try
             {
                 ksSketchDefinition def = SketchCreator.MakeSketch();
                 ksDocument2D doc = (ksDocument2D)def.BeginEdit();
-                doc.ksCircle(centerCoordinateX, centerCoordinateY, radius, lineType);
+                doc.ksCircle(coor.X, coor.Y, radius, lineType);
                 def.EndEdit();
+                return true;
             }
             catch
             {
-                MessageBox.Show("Circle sketch wasn't draw.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

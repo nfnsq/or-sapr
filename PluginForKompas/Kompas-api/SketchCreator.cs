@@ -1,6 +1,5 @@
 ﻿using Kompas6Constants3D;
 using Kompas6API5;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
@@ -17,16 +16,14 @@ namespace PluginForKompas
         {
             try
             {
-                ksEntity entitySketch = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_sketch);
+                ksEntity entitySketch = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_sketch);
                 ksSketchDefinition sketchDef = (ksSketchDefinition)entitySketch.GetDefinition();
-                sketchDef.SetPlane(KompasApp.basePlane);
+                sketchDef.SetPlane(KompasApp.BasePlane);
                 entitySketch.Create();
                 return sketchDef;
             }
             catch
             {
-                MessageBox.Show("Sketch wasn't create.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("GlobalObject")]
+[assembly: AssemblyTitle("Kompas-api")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GlobalObject")]
+[assembly: AssemblyProduct("Kompas-api")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("02e152df-4185-47be-ba9b-960cf0c2894a")]
+[assembly: Guid("52b1bc8e-2f4e-4e57-91bf-7bd54fafa74a")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

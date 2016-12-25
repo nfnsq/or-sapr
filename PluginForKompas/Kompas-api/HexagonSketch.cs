@@ -1,7 +1,5 @@
 ﻿using Kompas6API5;
-using System.Windows.Forms;
 using Kompas6Constants;
-using System.Windows.Forms;
 
 namespace PluginForKompas
 {
@@ -14,14 +12,14 @@ namespace PluginForKompas
         /// Метод создает эскиз правильного шестиугольника
         /// </summary>
         /// <param name="rad">Радиус описанной окружности шестиугольника</param>
-        public static void DrawHexagon(double rad)
+        public static bool DrawHexagon(double rad)
         {
             try
             {
                 ksSketchDefinition def = SketchCreator.MakeSketch();
                 ksDocument2D doc = (ksDocument2D)def.BeginEdit();
                 short polyParam = (short)StructType2DEnum.ko_RegularPolygonParam;
-                ksRegularPolygonParam param = (ksRegularPolygonParam)KompasApp.kompas.GetParamStruct(polyParam);
+                ksRegularPolygonParam param = (ksRegularPolygonParam)KompasApp.Kompas.GetParamStruct(polyParam);
                 param.count = 6;
                 param.xc = 0;
                 param.yc = 0;
@@ -31,11 +29,11 @@ namespace PluginForKompas
                 param.style = 1;
                 doc.ksRegularPolygon(param, 0);
                 def.EndEdit();
+                return true;
             }
             catch
             {
-                MessageBox.Show("Hexagon sketch wasn't create.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }
