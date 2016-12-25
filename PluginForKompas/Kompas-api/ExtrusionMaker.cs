@@ -17,10 +17,10 @@ namespace PluginForKompas
         {
             try
             {
-                ksEntityCollection coll = (ksEntityCollection)KompasApp.part.EntityCollection((short)Obj3dType.o3d_sketch);
+                ksEntityCollection coll = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_sketch);
                 int i = coll.GetCount();
                 ksEntity sketch = coll.GetByIndex(i - 1);
-                ksEntity entityExtr = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_baseExtrusion);
+                ksEntity entityExtr = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_baseExtrusion);
                 if (entityExtr != null)
                 {
                     ksBaseExtrusionDefinition extrusionDef = (ksBaseExtrusionDefinition)entityExtr.GetDefinition();

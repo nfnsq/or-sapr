@@ -17,11 +17,11 @@ namespace PluginForKompas
         {
             try
             {
-                ksEntityCollection elemCol = (ksEntityCollection)KompasApp.part.EntityCollection((short)Obj3dType.o3d_cutExtrusion);
+                ksEntityCollection elemCol = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_cutExtrusion);
                 if ((elemCol != null) && (elemCol.GetCount() != 0))
                 {
-                    ksEntity axis = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_axisOY);
-                    ksEntity circCopy = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_circularCopy);
+                    ksEntity axis = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_axisOY);
+                    ksEntity circCopy = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_circularCopy);
                     ksCircularCopyDefinition CopyDef = (ksCircularCopyDefinition)circCopy.GetDefinition();
 
                     if (CopyDef != null)
@@ -55,14 +55,14 @@ namespace PluginForKompas
         {
             try
             {
-                ksEntityCollection elemCol = (ksEntityCollection)KompasApp.part.EntityCollection((short)Obj3dType.o3d_cutExtrusion);
-                ksEntityCollection chamCol = (ksEntityCollection)KompasApp.part.EntityCollection((short)Obj3dType.o3d_chamfer);
+                ksEntityCollection elemCol = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_cutExtrusion);
+                ksEntityCollection chamCol = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_chamfer);
 
                 if ((elemCol != null) && (elemCol.GetCount() != 0)
                     && (chamCol != null) && (chamCol.GetCount() != 0))
                 {
-                    ksEntity axis = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_axisOY);
-                    ksEntity circCopy = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_circularCopy);
+                    ksEntity axis = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_axisOY);
+                    ksEntity circCopy = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_circularCopy);
                     ksCircularCopyDefinition CopyDef = (ksCircularCopyDefinition)circCopy.GetDefinition();
 
                     if (CopyDef != null)

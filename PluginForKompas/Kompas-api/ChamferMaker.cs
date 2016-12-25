@@ -19,10 +19,10 @@ namespace PluginForKompas
         {
             try
             {
-                ksEntityCollection edge = (ksEntityCollection)KompasApp.part.EntityCollection((short)Obj3dType.o3d_edge);
-                if ((edge != null) && (edge.SelectByPoint(coor.x, coor.y, coor.z)) && (edge.GetCount() != 0))
+                ksEntityCollection edge = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_edge);
+                if ((edge != null) && (edge.SelectByPoint(coor.X, coor.Y, coor.Z)) && (edge.GetCount() != 0))
                 {
-                    ksEntity chamfer = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_chamfer);
+                    ksEntity chamfer = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_chamfer);
                     ksChamferDefinition chDef = (ksChamferDefinition)chamfer.GetDefinition();
 
                     if (chDef != null)

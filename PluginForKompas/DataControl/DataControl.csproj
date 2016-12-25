@@ -44,9 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parameter\Parameter.csproj">
-      <Project>{96f014c9-9b71-43b7-aa09-89939bd7b68b}</Project>
-      <Name>Parameter</Name>
+    <ProjectReference Include="..\Global\Global.csproj">
+      <Project>{10cca96c-60bc-4669-8905-8dc38d512dc9}</Project>
+      <Name>Global</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

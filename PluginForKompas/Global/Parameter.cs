@@ -2,13 +2,13 @@
 {
     public struct Parameter
     {
-        public string descrpiption;
-        public double value;
+        public string Descrpiption;
+        public double Value;
 
         public Parameter(string descrip, double param)
         {
-            descrpiption = descrip;
-            value = param;
+            Descrpiption = descrip;
+            Value = param;
         }
     }
 }

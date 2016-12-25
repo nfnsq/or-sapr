@@ -19,7 +19,7 @@ namespace PluginForKompas
                 ksSketchDefinition def = SketchCreator.MakeSketch();
                 ksDocument2D doc = (ksDocument2D)def.BeginEdit();
                 short polyParam = (short)StructType2DEnum.ko_RegularPolygonParam;
-                ksRegularPolygonParam param = (ksRegularPolygonParam)KompasApp.kompas.GetParamStruct(polyParam);
+                ksRegularPolygonParam param = (ksRegularPolygonParam)KompasApp.Kompas.GetParamStruct(polyParam);
                 param.count = 6;
                 param.xc = 0;
                 param.yc = 0;

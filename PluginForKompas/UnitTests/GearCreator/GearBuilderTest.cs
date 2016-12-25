@@ -32,16 +32,16 @@ namespace UnitTests.GearCreator
             Parameter[] param = new Parameter[list.Length];
             for (int i = 0; i < list.Length; i++)
             {
-                param[i].value = list[i];
+                param[i].Value = list[i];
             }
-            param[0].descrpiption = "depth_of_the_hexagon_dip";
-            param[1].descrpiption = "stiffeners_width";
-            param[2].descrpiption = "stiffener_depth";
-            param[3].descrpiption = "diameter_of_the_heaxagon_circumscribed_circle";
-            param[4].descrpiption = "diameter_of_the_center_hole";
-            param[5].descrpiption = "diameter_of_the_circumential_holes";
-            param[6].descrpiption = "rigidity_of_geat_unit";
-            param[0].descrpiption = "count_of_gear_teeth";
+            param[0].Descrpiption = "depth_of_the_hexagon_dip";
+            param[1].Descrpiption = "stiffeners_width";
+            param[2].Descrpiption = "stiffener_depth";
+            param[3].Descrpiption = "diameter_of_the_heaxagon_circumscribed_circle";
+            param[4].Descrpiption = "diameter_of_the_center_hole";
+            param[5].Descrpiption = "diameter_of_the_circumential_holes";
+            param[6].Descrpiption = "rigidity_of_geat_unit";
+            param[0].Descrpiption = "count_of_gear_teeth";
 
             GearBuilder Gear = new GearBuilder(param);
             Assert.AreEqual(Gear.New(), res);

@@ -16,9 +16,9 @@ namespace PluginForKompas
         {
             try
             {
-                ksEntity entitySketch = (ksEntity)KompasApp.part.NewEntity((short)Obj3dType.o3d_sketch);
+                ksEntity entitySketch = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_sketch);
                 ksSketchDefinition sketchDef = (ksSketchDefinition)entitySketch.GetDefinition();
-                sketchDef.SetPlane(KompasApp.basePlane);
+                sketchDef.SetPlane(KompasApp.BasePlane);
                 entitySketch.Create();
                 return sketchDef;
             }

@@ -51,13 +51,13 @@
       <Project>{0b383148-64fe-4127-82ab-61c4e95f9324}</Project>
       <Name>GearCreator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GlobalObject\Initialization.csproj">
-      <Project>{2d6e1e21-48cc-4c51-b77e-72885a64ba53}</Project>
-      <Name>Initialization</Name>
+    <ProjectReference Include="..\Global\Global.csproj">
+      <Project>{10cca96c-60bc-4669-8905-8dc38d512dc9}</Project>
+      <Name>Global</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parameter\Parameter.csproj">
-      <Project>{96f014c9-9b71-43b7-aa09-89939bd7b68b}</Project>
-      <Name>Parameter</Name>
+    <ProjectReference Include="..\Kompas-api\Kompas-api.csproj">
+      <Project>{2be4a84a-e7f7-4d70-97fa-a4c2bf659a47}</Project>
+      <Name>Kompas-api</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

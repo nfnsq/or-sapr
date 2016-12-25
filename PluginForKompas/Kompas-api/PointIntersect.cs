@@ -23,15 +23,15 @@ namespace PluginForKompas
         /// <param name="a2">Конечный угол дуги</param>
         /// <param name="par">Выходные данные</param>
         public static bool LinArc(Point p1, Point p2,
-                                    double rad, double a1, double a2, 
+                                    double rad, double a1, double a2,
                                     ksMathPointParam par)
         {
             try
             {
-                ksDynamicArray arr = (ksDynamicArray)KompasApp.kompas.GetDynamicArray(ldefin2d.POINT_ARR);
+                ksDynamicArray arr = (ksDynamicArray)KompasApp.Kompas.GetDynamicArray(ldefin2d.POINT_ARR);
                 if ((arr != null) && (par != null))
                 {
-                    KompasApp.mat.ksIntersectLinSArc(
+                    KompasApp.Mat.ksIntersectLinSArc(
                         p1.X, p1.Y, p2.X, p2.Y,
                         0, 0, rad, a1, a2, 1, arr);
 
@@ -65,11 +65,11 @@ namespace PluginForKompas
         {
             try
             {
-                ksDynamicArray arr = (ksDynamicArray)KompasApp.kompas.GetDynamicArray(ldefin2d.POINT_ARR);
+                ksDynamicArray arr = (ksDynamicArray)KompasApp.Kompas.GetDynamicArray(ldefin2d.POINT_ARR);
 
                 if ((arr != null) && (par != null))
                 {
-                    KompasApp.mat.ksIntersectArcArc(
+                    KompasApp.Mat.ksIntersectArcArc(
                         p1.X, p1.Y, rad1, a11, a12, 1,
                         p2.X, p2.Y, rad2, a21, a22, 1,
                         arr

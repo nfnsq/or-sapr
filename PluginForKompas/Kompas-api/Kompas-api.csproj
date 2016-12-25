@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PluginForKompas</RootNamespace>
-    <AssemblyName>Model</AssemblyName>
+    <AssemblyName>Kompas-api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -82,10 +82,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircleSketch.cs" />
     <Compile Include="CircularCopyMaker.cs" />
     <Compile Include="ChamferMaker.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DipSketch.cs" />
+    <Compile Include="GearTeethSketch.cs" />
+    <Compile Include="HexagonSketch.cs" />
+    <Compile Include="KompasApp.cs" />
     <Compile Include="PointIntersect.cs" />
     <Compile Include="HoleMaker.cs" />
     <Compile Include="ExtrusionMaker.cs" />
@@ -93,17 +98,13 @@
     <Compile Include="SketchCreator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GlobalObject\Initialization.csproj">
-      <Project>{2d6e1e21-48cc-4c51-b77e-72885a64ba53}</Project>
-      <Name>Initialization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Parameter\Parameter.csproj">
-      <Project>{96f014c9-9b71-43b7-aa09-89939bd7b68b}</Project>
-      <Name>Parameter</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Global\Global.csproj">
+      <Project>{10cca96c-60bc-4669-8905-8dc38d512dc9}</Project>
+      <Name>Global</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

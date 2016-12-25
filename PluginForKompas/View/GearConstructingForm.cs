@@ -9,8 +9,8 @@ namespace View
 {
     public partial class GearConstructingForm : Form
     {
-        private double rigidity = 0;
-        private double teethCount = 0;
+        private double _rigidity = 0;
+        private double _teethCount = 0;
 
         public GearConstructingForm()
         {
@@ -27,8 +27,8 @@ namespace View
             if (kompasCheckBox.Checked)
             {
                 KompasApp.GetActiveApp();
-                count_of_gear_teeth.Enabled = true;
-                rigidity_of_geat_unit.Enabled = true;
+                countOfGearTeethTextBox.Enabled = true;
+                rigidityOfGeatUnitTextBox.Enabled = true;
                 buildButton.Enabled = true;
             }
 
@@ -97,9 +97,9 @@ namespace View
                             {
                                 length++;
                                 Array.Resize<Parameter>(ref parameters, length);
-                                parameters[length - 1].value = double.Parse(textbox.Text,
+                                parameters[length - 1].Value = double.Parse(textbox.Text,
                                     CultureInfo.InvariantCulture);
-                                parameters[length - 1].descrpiption = textbox.Name;
+                                parameters[length - 1].Descrpiption = textbox.Name;
                             }
                         }
                     }
@@ -122,122 +122,69 @@ namespace View
         /// <param name="regex">Регулярное выражение</param>
         /// <param name="text">Проверяемая строка</param>
         /// <param name="e">Данные отменяемого события</param>
-        private void CheckData(string text, CancelEventArgs e)
+        private void DataValidating(object sender, CancelEventArgs e)
         {
             Regex regex = new Regex("^[0-9]+$");
-            if ((regex.IsMatch(text) != true) && (text != ""))
+            if ((regex.IsMatch(((TextBox)sender).Text) != true) && (((TextBox)sender).Text != ""))
             {
                 MessageBox.Show("Invalid data. Please, try again.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
-                text = "";
+                ((TextBox)sender).Text = "";
             }
-        }
-
-        private void teethCountTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckData(count_of_gear_teeth.Text, e);
-        }
-
-        private void rigidityUnitTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckData(rigidity_of_geat_unit.Text, e);
-        }
-
-        private void centerHoleDiamTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckData(diameter_of_the_center_hole.Text, e);
-        }
-
-        private void circHolesDiamTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckData(diameter_of_the_circumential_holes.Text, e);
-        }
-
-        private void hexDiamTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckData(diameter_of_the_heaxagon_circumscribed_circle.Text, e);
-        }
-
-        private void hexDipDepthTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckData(depth_of_the_hexagon_dip.Text, e);
-        }
-
-        private void stiffWidthTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckData(stiffeners_width.Text, e);
-        }
-
-        private void stiffDepthTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            CheckData(depth_of_the_hexagon_dip.Text, e);
         }
 
         private void enableTextBoxs()
         {
-            if ((rigidity != 0) && (teethCount != 0))
+            if ((_rigidity != 0) && (_teethCount != 0))
             {
-                diameter_of_the_center_hole.Enabled = true;
-                diameter_of_the_circumential_holes.Enabled = true;
-                stiffener_depth.Enabled = true;
-                stiffeners_width.Enabled = true;
-                depth_of_the_hexagon_dip.Enabled = true;
+                diameterOfTheCenterHoleTextBox.Enabled = true;
+                diameterOfTheCircumentialHolesTextBox.Enabled = true;
+                stiffenerDepthTextBox.Enabled = true;
+                stiffenersWidthTextBox.Enabled = true;
+                depthOfTheHexagonDipTextBox.Enabled = true;
             }
         }
 
         private void disableTextBoxs()
         {
-            diameter_of_the_center_hole.Enabled = false;
-            diameter_of_the_circumential_holes.Enabled = false;
-            stiffener_depth.Enabled = false;
-            stiffeners_width.Enabled = false;
-            depth_of_the_hexagon_dip.Enabled = false;
+            diameterOfTheCenterHoleTextBox.Enabled = false;
+            diameterOfTheCircumentialHolesTextBox.Enabled = false;
+            stiffenerDepthTextBox.Enabled = false;
+            stiffenersWidthTextBox.Enabled = false;
+            depthOfTheHexagonDipTextBox.Enabled = false;
         }
 
-        private void teethCountTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (Regex.IsMatch(count_of_gear_teeth.Text, "^[0-9]+$"))
-            {
-                teethCount = double.Parse(count_of_gear_teeth.Text);
-                enableTextBoxs();
-            }
-            else
-            {
-                disableTextBoxs();
-            }
-        }
-        
-        private void rigidityUnitTextBox_TextChanged(object sender, EventArgs e)
-
-        {
-            if (Regex.IsMatch(rigidity_of_geat_unit.Text, "^[0-9]+$"))
-            {
-                rigidity = double.Parse(rigidity_of_geat_unit.Text);
-                enableTextBoxs();
-            }
-            else
-            {
-                disableTextBoxs();
-            }
-        }
-
-        private void centerHoleDiamTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (Regex.IsMatch(diameter_of_the_center_hole.Text, "^[0-9]+$"))
-            {
-                diameter_of_the_heaxagon_circumscribed_circle.Enabled = true;
-            }
-            else
-            {
-                diameter_of_the_heaxagon_circumscribed_circle.Enabled = false;
-            }
-        }
-
-        private void hexDiamTextBox_TextChanged(object sender, EventArgs e)
+        private void ChangeEnable(object sender, EventArgs e)
         {
 
-        }
+            if (((TextBox)sender) == countOfGearTeethTextBox)
+            {
+                if (Regex.IsMatch(((TextBox)sender).Text, "^[0-9]+$"))
+                {
+                    _teethCount = double.Parse(((TextBox)sender).Text);
+                    enableTextBoxs();
+                }
+                else disableTextBoxs();
+            }
 
+            if (((TextBox)sender) == rigidityOfGeatUnitTextBox)
+            {
+                if (Regex.IsMatch(((TextBox)sender).Text, "^[0-9]+$"))
+                {
+                    _rigidity = double.Parse(((TextBox)sender).Text);
+                    enableTextBoxs();
+                }
+                else disableTextBoxs();
+            }
+            if (((TextBox)sender) == diameterOfTheCenterHoleTextBox)
+            {
+                if (Regex.IsMatch(((TextBox)sender).Text, "^[0-9]+$"))
+                {
+                    diameterOfTheHeaxagonCircumscribedCircleTextBox.Enabled = true;
+                }
+                else diameterOfTheHeaxagonCircumscribedCircleTextBox.Enabled = false;
+            }
+        }
     }
 }
