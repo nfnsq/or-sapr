@@ -35,6 +35,7 @@ namespace PluginForKompas
             {
                 MessageBox.Show("KompasApplication doesn't found!", "Warning",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
             }
         }
 
@@ -70,24 +71,6 @@ namespace PluginForKompas
         public static void Exit()
         {
             Kompas.Quit();
-        }
-
-        /// <summary>
-        /// Метод смещает базовую плоскость по оси OY на заданное расстояние
-        /// </summary>
-        /// <param name="offset">Расстояние от базовой плоскости до смещеннной</param>
-        public static void MovingBasePlaneByYAxis(double offset, bool direction)
-        {
-            ksEntity plane = (ksEntity)Part.NewEntity((short)Obj3dType.o3d_planeOffset);
-            ksPlaneOffsetDefinition planeDef = (ksPlaneOffsetDefinition)plane.GetDefinition();
-            if (planeDef != null)
-            {
-                planeDef.SetPlane(BasePlane);
-                planeDef.direction = direction;
-                planeDef.offset = offset;
-                plane.Create();
-            }
-            BasePlane = plane;
         }
     }
 }

@@ -11,10 +11,6 @@ namespace PluginForKompas
         /// <summary>
         /// Метод создает фаску в 45'
         /// </summary>
-        /// <param name="dist">Длина катетов фаски</param>
-        /// <param name="x">координата х ребра</param>
-        /// <param name="y">координата у ребра</param>
-        /// <param name="z">координата z ребра</param>
         public static bool Create(double dist, Point3d coor)
         {
             try

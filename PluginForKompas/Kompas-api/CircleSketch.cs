@@ -11,10 +11,10 @@ namespace PluginForKompas
         /// <summary>
         /// Метод создает эскиз окружности
         /// </summary>
-        /// <param name="centerCoordinateX">Координата х центра окружности</param>
-        /// <param name="centerCoordinateY">Координата у центра окружности</param>
+        /// <param name="coor">Координаты центра окружности</param>
         /// <param name="radius">Радиус окружности</param>
-        /// <param name="lineType">Стиль линии</param>
+        /// <param name="lineType">Тип линии</param>
+        /// <returns></returns>
         public static bool DrawCircle(Point coor, double radius, int lineType)
         {
             try

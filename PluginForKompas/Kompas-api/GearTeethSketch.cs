@@ -22,10 +22,10 @@ namespace PluginForKompas
                 ksSketchDefinition def = SketchCreator.MakeSketch();
                 ksDocument2D doc = (ksDocument2D)def.BeginEdit();
                 ///углы
-                double a0 = KompasApp.Mat.ksAngle(0, 0, 1, 0);
-                double a90 = KompasApp.Mat.ksAngle(0, 0, 0, 1);
-                double a180 = KompasApp.Mat.ksAngle(0, 0, -1, 0);
-                double a270 = KompasApp.Mat.ksAngle(0, 0, 0, -1);
+                double angle0 = 0;
+                double angle90 = 90;
+                double angle180 = 180;
+                double angle270 = 270;
                 double x;
                 double y;
                 short mathPoint = (short)StructType2DEnum.ko_MathPointParam;
@@ -38,44 +38,44 @@ namespace PluginForKompas
                 ///точка 1                
                 Point point1 = new Point(0, 0);
                 Point point2 = new Point(0, projectionCircle);
-                PointIntersect.LinArc(point1, point2, baseCircle / 2, a0, a180, p1);
+                PointIntersect.LinArc(point1, point2, baseCircle / 2, angle0, angle180, p1);
 
                 ///точка 2
                 point1 = new Point(0, 0);
                 point2 = new Point(p1.x, p1.y);
                 ksMathPointParam p2 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, baseCircle / 2, a0, a180,
-                                        point2, 0.5 * Math.PI * m, a90, a270, p2);
+                PointIntersect.ArcArc(point1, baseCircle / 2, angle0, angle180,
+                                        point2, 0.5 * Math.PI * m, angle90, angle270, p2);
 
                 ///точка 3
                 point2 = new Point(p2.x, p2.y);
                 ksMathPointParam p3 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
                 PointIntersect.ArcArc(point1, mainCircle / 2,
-                                        a0, a180, point2, baseCircle / 6, a270, a90, p3);
+                                        angle0, angle180, point2, baseCircle / 6, angle270, angle90, p3);
 
                 ///точка C
                 point2 = new Point(p3.x, p3.y);
                 ksMathPointParam pC = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, projectionCircle / 2, a0, a180,
-                                        point2, baseCircle / 6, a90, a270, pC);
+                PointIntersect.ArcArc(point1, projectionCircle / 2, angle0, angle180,
+                                        point2, baseCircle / 6, angle90, angle270, pC);
 
                 ///точка 4
                 ksMathPointParam p4 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, mainCircle / 2, a0, a180,
-                                        point2, baseCircle / 6, a90, a270, p4);
+                PointIntersect.ArcArc(point1, mainCircle / 2, angle0, angle180,
+                                        point2, baseCircle / 6, angle90, angle270, p4);
 
 
                 ///точка F
                 point2 = new Point(p4.x, p4.y);
                 ksMathPointParam pF = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
                 PointIntersect.LinArc(point1, point2,
-                                        troughsCircle / 2, a0, a180, pF);
+                                        troughsCircle / 2, angle0, angle180, pF);
 
                 ///точка 5
                 point2 = new Point(p1.x, p1.y);
                 ksMathPointParam p5 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, baseCircle / 2, a0, a180,
-                                        point2, 0.75 * Math.PI * m, a90, a270, p5);
+                PointIntersect.ArcArc(point1, baseCircle / 2, angle0, angle180,
+                                        point2, 0.75 * Math.PI * m, angle90, angle270, p5);
 
                 ///точка А
                 ksMathPointParam pA = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);

@@ -11,16 +11,16 @@ namespace UnitTests.GearCreator
     [TestFixture]
     class GearBuilderTest
     {
-        [TestCase(true, 18, 15, 17, 23, 19, 15, 17, 18, TestName = "Тестирование при корректных значениях параметров")]
-        [TestCase(false, 18, 10, 17, 23, 19, 15, 17, 18, TestName = "Тестирование при некорректных значениях параметров")]
+        [TestCase(true, 18, 15, 17, 35, 40, 30, 17, 18, TestName = "Тестирование при корректных значениях параметров")]
+        [TestCase(false, 18, 15, 17, 35, 40, 30, 17, 1, TestName = "Тестирование при некорректных значениях параметров")]
         [TestCase(false, double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity,
             double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity,
             double.PositiveInfinity, TestName = "Тестирование при значениях параметров PositiveInfinity")]
         [TestCase(false, double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity,
             double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity,
-            double.NegativeInfinity, TestName = "Тестирование при корректных значениях параметров NegativeInfinity")]
+            double.NegativeInfinity, TestName = "Тестирование при значениях параметров NegativeInfinity")]
         [TestCase(false, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, 
-            double.NaN, double.NaN, double.NaN, TestName = "Тестирование значениях параметров NaN")]
+            double.NaN, double.NaN, double.NaN, TestName = "Тестирование при значениях параметров NaN")]
         [TestCase(false, double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue, 
             double.MaxValue, double.MaxValue, double.MaxValue, TestName = "Тестирование при значениях параметров MaxValue")]
         [TestCase(false, double.MinValue, double.MinValue, double.MinValue, double.MinValue, double.MinValue,
@@ -34,17 +34,17 @@ namespace UnitTests.GearCreator
             {
                 param[i].Value = list[i];
             }
-            param[0].Descrpiption = "depth_of_the_hexagon_dip";
-            param[1].Descrpiption = "stiffeners_width";
-            param[2].Descrpiption = "stiffener_depth";
-            param[3].Descrpiption = "diameter_of_the_heaxagon_circumscribed_circle";
-            param[4].Descrpiption = "diameter_of_the_center_hole";
-            param[5].Descrpiption = "diameter_of_the_circumential_holes";
-            param[6].Descrpiption = "rigidity_of_geat_unit";
-            param[0].Descrpiption = "count_of_gear_teeth";
+            param[0].Descrpiption = Global.Properties.Resources.hexagonDepth;
+            param[1].Descrpiption = Global.Properties.Resources.stiffenerDepth;
+            param[2].Descrpiption = Global.Properties.Resources.stiffenerWidth;
+            param[3].Descrpiption = Global.Properties.Resources.hexagonDiameter;
+            param[4].Descrpiption = Global.Properties.Resources.circumentalHoles;
+            param[5].Descrpiption = Global.Properties.Resources.centerHole; 
+            param[6].Descrpiption = Global.Properties.Resources.rigidity;
+            param[7].Descrpiption = Global.Properties.Resources.count;
 
             GearBuilder Gear = new GearBuilder(param);
-            Assert.AreEqual(Gear.New(), res);
+            Assert.AreEqual(res, Gear.New());
         }
     }
 }

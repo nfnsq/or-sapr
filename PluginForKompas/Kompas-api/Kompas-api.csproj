@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AxisChanger.cs" />
     <Compile Include="CircleSketch.cs" />
     <Compile Include="CircularCopyMaker.cs" />
     <Compile Include="ChamferMaker.cs">

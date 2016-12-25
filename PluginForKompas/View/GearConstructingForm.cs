@@ -4,6 +4,7 @@ using PluginForKompas;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
+using Global.Properties;
 
 namespace View
 {
@@ -15,42 +16,6 @@ namespace View
         public GearConstructingForm()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// Запуск приложения КОМПАС
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void kompasCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (kompasCheckBox.Checked)
-            {
-                KompasApp.GetActiveApp();
-                countOfGearTeethTextBox.Enabled = true;
-                rigidityOfGeatUnitTextBox.Enabled = true;
-                buildButton.Enabled = true;
-            }
-
-            if (!kompasCheckBox.Checked)
-            {
-                KompasApp.Exit();
-                foreach (Control groupBoxData in this.Controls)
-                {
-                    if ((groupBoxData is GroupBox)
-                        && (groupBoxData.Name == "dataGroupBox"))
-                    {
-                        foreach (Control textbox in groupBoxData.Controls)
-                        {
-                            if (textbox is TextBox)
-                            {
-                                textbox.Enabled = false;
-                            }
-                        }
-                    }
-                }
-                buildButton.Enabled = false;
-            }
         }
 
         /// <summary>
@@ -99,11 +64,27 @@ namespace View
                                 Array.Resize<Parameter>(ref parameters, length);
                                 parameters[length - 1].Value = double.Parse(textbox.Text,
                                     CultureInfo.InvariantCulture);
-                                parameters[length - 1].Descrpiption = textbox.Name;
+                                if (textbox.Name == "countOfGearTeethTextBox")
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.count;
+                                if (textbox.Name == "rigidityOfGeatUnitTextBox")
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.rigidity;
+                                if (textbox.Name == "diameterOfTheCenterHoleTextBox")
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.centerHole;
+                                if (textbox.Name == "diameterOfTheCircumentialHolesTextBox")
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.circumentalHoles;
+                                if (textbox.Name == "diameterOfTheHeaxagonCircumscribedCircleTextBox")
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.hexagonDiameter;
+                                if (textbox.Name == "depthOfTheHexagonDipTextBox")
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.hexagonDepth;
+                                if (textbox.Name == "stiffenersWidthTextBox")
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.stiffenerWidth;
+                                if (textbox.Name == "stiffenerDepthTextBox")
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.stiffenerDepth;
                             }
                         }
                     }
                 }
+
                 if (length != 8)
                     throw new Exception();
                 return parameters;
@@ -185,6 +166,16 @@ namespace View
                 }
                 else diameterOfTheHeaxagonCircumscribedCircleTextBox.Enabled = false;
             }
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            startToolStripStatusLabel.Text = "Kompas starting...";
+            KompasApp.GetActiveApp();
+            countOfGearTeethTextBox.Enabled = true;
+            rigidityOfGeatUnitTextBox.Enabled = true;
+            buildButton.Enabled = true;
+            startToolStripStatusLabel.Text = "Kompas started.";
         }
     }
 }

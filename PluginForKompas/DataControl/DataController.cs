@@ -13,22 +13,23 @@ namespace PluginForKompas
         /// </summary>
         /// <param name="data">Список параметров</param>
         /// <returns></returns>
-        public bool Validating(params Parameter[] data)
+        public bool Validating(double internalArcOfDipDiam, double externalArcOfDipDiam,
+            double chamferWidth, double gearDepth, params Parameter[] data)
         {
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i].Descrpiption == "count_of_gear_teeth")
+                if (data[i].Descrpiption == Global.Properties.Resources.count)
                 {
-                    ///количество зубьев может быть от 17 до 40 [Википедия]
+                    // количество зубьев может быть от 17 до 40 [Википедия]
                     if (CheckData(data[i], 17, 40))
                     {
                         _teethCount = data[i].Value;
                     }
                     else return false;
                 }
-                if (data[i].Descrpiption == "rigidity_of_geat_unit")
+                if (data[i].Descrpiption == Global.Properties.Resources.rigidity)
                 {
-                    ///модуль жесткости может быть от 0.5 до 50 [ГОСТ 9563-60]
+                    // модуль жесткости может быть от 0.5 до 50 [ГОСТ 9563-60]
                     if (CheckData(data[i], 0.5, 50))
                     {
                         _rigidity = data[i].Value;
@@ -36,16 +37,18 @@ namespace PluginForKompas
                     else return false;
                 }
             }
+
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i].Descrpiption == "diameter_of_the_center_hole")
+                if (data[i].Descrpiption == Global.Properties.Resources.centerHole)
                 {
-                    ///диаметр отверстия в центре от 5
+                    // диаметр отверстия в центре от 5
                     double min = 5;
-                    ///до диаметра вписанной окружности наибольшего шестиугольника
-                    ///диаметр описанной окружноси которого не превысит
-                    ///диаметр меньшей дуги углубления
-                    double max = (0.25 * _rigidity * (_teethCount + 2) - 10) * Math.Cos(30 * Math.PI / 180);
+                    // до диаметра вписанной окружности наибольшего шестиугольника
+                    // которую можно поместить внутри окружности с диаметром меньшей дуги углубления
+                    // формула расчета вписанной окружности правильного шестиугольника в зависмости от
+                    // описанной окружности d = D * cos(30)
+                    double max = (internalArcOfDipDiam - chamferWidth) * Math.Cos(30 * Math.PI / 180);
                     if (CheckData(data[i], min, max))
                     {
                         _centerHoleDiam = data[i].Value;
@@ -55,45 +58,45 @@ namespace PluginForKompas
             }
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i].Descrpiption == "diameter_of_the_circumential_holes")
+                if (data[i].Descrpiption == Global.Properties.Resources.circumentalHoles)
                 {
-                    ///диаметр отверстий по окружноти от 5
+                    // диаметр отверстий по окружноти от 5
                     double min = 5;
-                    ///до ширины углубления
-                    double max = (0.9 * _rigidity * (_teethCount - 2.5) - 0.24 * _rigidity * (_teethCount + 2) - 10) / 2;
+                    // до ширины углубления
+                    double max = (externalArcOfDipDiam - internalArcOfDipDiam - chamferWidth) / 2;
                     if (!CheckData(data[i], min, max))
                         return false;
                 }
-                if (data[i].Descrpiption == "diameter_of_the_heaxagon_circumscribed_circle")
+                if (data[i].Descrpiption == Global.Properties.Resources.hexagonDiameter)
                 {
-                    ///диаметр описанной окружности шестиугольника
-                    ///минимум высчитывается как описанная окружность шестиугольника
-                    ///у которого диаметр вписанноц окружности равен 
-                    ///диаметру отверстия в центре
+                    // минимальный диаметр описанной окружности шестиугольника
+                    // формула для расчета описанной окружности в зависимости от вписанной
                     double min = _centerHoleDiam / Math.Cos(30 * Math.PI / 180);
-                    ///максимум высчитывается как диаметр меньшей дуги углубления
-                    double max = 0.25 * _rigidity * (_teethCount + 2) - 10;
+                    // максимальный диаметр высчитывается как диаметр меньшей дуги углубления 
+                    // минус ширина фаски
+                    double max = internalArcOfDipDiam - chamferWidth;
                     if (!CheckData(data[i], min, max))
                         return false;
                 }
-                if (data[i].Descrpiption == "depth_of_the_hexagon_dip")
+                if (data[i].Descrpiption == Global.Properties.Resources.hexagonDepth)
                 {
-                    ///глубина выдавливания выреза под шестигранник
-                    ///от 0 до 2/3 от глубины шестерни
-                    if (!CheckData(data[i], 0, _rigidity * _teethCount * 0.1))
+                    // глубина выдавливания выреза под шестигранник
+                    // от 0 до 1/2 от толщины шестерни
+
+                    if (!CheckData(data[i], 0, gearDepth / 2))
                         return false;
                 }
-                if (data[i].Descrpiption == "stiffeners_width")
+                if (data[i].Descrpiption == Global.Properties.Resources.stiffenerWidth)
                 {
-                    ///ширина ребра жесткости от 12 до 22, просто потому что так захотелось :)
+                    // ширина ребра жесткости от 12 до 22, просто потому что так захотелось :)
                     if (!CheckData(data[i], 12, 22))
                         return false;
                 }
-                if (data[i].Descrpiption == "stiffener_depth")
+                if (data[i].Descrpiption == Global.Properties.Resources.stiffenerDepth)
                 {
-                    ///глубина выдавливания выреза под углубления
-                    ///от 0 до 2/3 от глубины шестерни
-                    if (!CheckData(data[i], 0, _rigidity * _teethCount * 0.1))
+                    // глубина выдавливания выреза под углубления
+                    // от 0 до 1/2 от глубины шестерни
+                    if (!CheckData(data[i], 0, gearDepth / 2))
                         return false;
                 }
             }
@@ -111,9 +114,11 @@ namespace PluginForKompas
         {
             if ((data.Value < min)||(data.Value > max))
             {
+                #if !DEBUG
                 MessageBox.Show("Invalid data "+ data.Descrpiption +". Please, try again. " +
                 "Enter number between " + Math.Round(min) + " and " + Math.Round(max) + ".", 
                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                #endif
                 return false;
             }
             else if (double.IsNaN(data.Value))

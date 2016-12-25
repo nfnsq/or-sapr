@@ -14,14 +14,13 @@ namespace PluginForKompas
         /// Метод находит точку пересечения отрезка с дугой, 
         /// центр дуги - начало координат плоскости
         /// </summary>
-        /// <param name="x1">Координата х первой точки отрезка</param>
-        /// <param name="y1">Координата у первой точки отрезка</param>
-        /// <param name="x2">Координата х второй точки отрезка</param>
-        /// <param name="y2">Координата у второй точки отрезка</param>
+        /// <param name="p1">Координаты первой точки отрезка</param>
+        /// <param name="p2">Координаты второй точки отрезка</param>
         /// <param name="rad">Радиус дуги</param>
         /// <param name="a1">Начальный угол дуги</param>
         /// <param name="a2">Конечный угол дуги</param>
         /// <param name="par">Выходные данные</param>
+        /// <returns></returns>
         public static bool LinArc(Point p1, Point p2,
                                     double rad, double a1, double a2,
                                     ksMathPointParam par)
@@ -48,13 +47,11 @@ namespace PluginForKompas
         /// <summary>
         /// Метод находит точку пересечения двух дуг
         /// </summary>
-        /// <param name="x1">Координата х центра дуги1</param>
-        /// <param name="y1">Координата у центра дуги1</param>
+        /// <param name="p1">Координаты центра дуги1</param>
         /// <param name="rad1">Ралиус дуги1</param>
         /// <param name="a11">Начальный угол дуги1</param>
         /// <param name="a12">Конечный угол дуги1</param>
-        /// <param name="x2">Координата х центра дуги2</param>
-        /// <param name="y2">Координата y центра дуги2</param>
+        /// <param name="p2">Координаты центра дуги2</param>
         /// <param name="rad2">Радиус дуги2</param>
         /// <param name="a21">Начальый угол дуги2</param>
         /// <param name="a22">Конечный угол дуги2</param>
