@@ -117,28 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="centerHole" xml:space="preserve">
+  <data name="CenterHole" xml:space="preserve">
     <value>Diameter of the center hole</value>
   </data>
-  <data name="circumentalHoles" xml:space="preserve">
+  <data name="CircumentalHoles" xml:space="preserve">
     <value>Diameter of hte circumential holes</value>
   </data>
-  <data name="count" xml:space="preserve">
+  <data name="Count" xml:space="preserve">
     <value>Count of gear teeth</value>
   </data>
-  <data name="hexagonDepth" xml:space="preserve">
+  <data name="HexagonDepth" xml:space="preserve">
     <value>Depth of the hexagon dip</value>
   </data>
-  <data name="hexagonDiameter" xml:space="preserve">
+  <data name="HexagonDiameter" xml:space="preserve">
     <value>Diameter of the hexagon</value>
   </data>
-  <data name="rigidity" xml:space="preserve">
+  <data name="Rigidity" xml:space="preserve">
     <value>Rigidity of gear unit</value>
   </data>
-  <data name="stiffenerDepth" xml:space="preserve">
+  <data name="StiffenerDepth" xml:space="preserve">
     <value>Stiffener depth</value>
   </data>
-  <data name="stiffenerWidth" xml:space="preserve">
+  <data name="StiffenerWidth" xml:space="preserve">
     <value>Stiffener width</value>
   </data>
 </root>

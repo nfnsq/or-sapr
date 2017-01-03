@@ -4,7 +4,7 @@ using PluginForKompas;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
-using Global.Properties;
+using Global;
 
 namespace View
 {
@@ -64,22 +64,22 @@ namespace View
                                 Array.Resize<Parameter>(ref parameters, length);
                                 parameters[length - 1].Value = double.Parse(textbox.Text,
                                     CultureInfo.InvariantCulture);
-                                if (textbox.Name == "countOfGearTeethTextBox")
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.count;
-                                if (textbox.Name == "rigidityOfGeatUnitTextBox")
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.rigidity;
-                                if (textbox.Name == "diameterOfTheCenterHoleTextBox")
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.centerHole;
-                                if (textbox.Name == "diameterOfTheCircumentialHolesTextBox")
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.circumentalHoles;
-                                if (textbox.Name == "diameterOfTheHeaxagonCircumscribedCircleTextBox")
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.hexagonDiameter;
-                                if (textbox.Name == "depthOfTheHexagonDipTextBox")
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.hexagonDepth;
-                                if (textbox.Name == "stiffenersWidthTextBox")
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.stiffenerWidth;
-                                if (textbox.Name == "stiffenerDepthTextBox")
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.stiffenerDepth;
+                                if (textbox.Name == countOfGearTeethTextBox.Name)
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.Count;
+                                if (textbox.Name == rigidityOfGeatUnitTextBox.Name)
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.Rigidity;
+                                if (textbox.Name == diameterOfTheCenterHoleTextBox.Name)
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.CenterHole;
+                                if (textbox.Name == diameterOfTheCircumentialHolesTextBox.Name)
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.CircumentalHoles;
+                                if (textbox.Name == diameterOfTheHeaxagonCircumscribedCircleTextBox.Name)
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.HexagonDiameter;
+                                if (textbox.Name == depthOfTheHexagonDipTextBox.Name)
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.HexagonDepth;
+                                if (textbox.Name == stiffenersWidthTextBox.Name)
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.StiffenerWidth;
+                                if (textbox.Name == stiffenerDepthTextBox.Name)
+                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.StiffenerDepth;
                             }
                         }
                     }

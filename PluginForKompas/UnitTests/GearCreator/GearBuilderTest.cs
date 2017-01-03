@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
 using PluginForKompas;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Global;
 
 namespace UnitTests.GearCreator
 {
@@ -34,14 +30,14 @@ namespace UnitTests.GearCreator
             {
                 param[i].Value = list[i];
             }
-            param[0].Descrpiption = Global.Properties.Resources.hexagonDepth;
-            param[1].Descrpiption = Global.Properties.Resources.stiffenerDepth;
-            param[2].Descrpiption = Global.Properties.Resources.stiffenerWidth;
-            param[3].Descrpiption = Global.Properties.Resources.hexagonDiameter;
-            param[4].Descrpiption = Global.Properties.Resources.circumentalHoles;
-            param[5].Descrpiption = Global.Properties.Resources.centerHole; 
-            param[6].Descrpiption = Global.Properties.Resources.rigidity;
-            param[7].Descrpiption = Global.Properties.Resources.count;
+            param[0].Descrpiption = Global.Properties.Resources.HexagonDepth;
+            param[1].Descrpiption = Global.Properties.Resources.StiffenerDepth;
+            param[2].Descrpiption = Global.Properties.Resources.StiffenerWidth;
+            param[3].Descrpiption = Global.Properties.Resources.HexagonDiameter;
+            param[4].Descrpiption = Global.Properties.Resources.CircumentalHoles;
+            param[5].Descrpiption = Global.Properties.Resources.CenterHole; 
+            param[6].Descrpiption = Global.Properties.Resources.Rigidity;
+            param[7].Descrpiption = Global.Properties.Resources.Count;
 
             GearBuilder Gear = new GearBuilder(param);
             Assert.AreEqual(res, Gear.New());

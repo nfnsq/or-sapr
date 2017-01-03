@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Global;
 
 namespace PluginForKompas
 {

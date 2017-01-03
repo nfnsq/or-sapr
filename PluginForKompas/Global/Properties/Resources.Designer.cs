@@ -63,72 +63,72 @@ namespace Global.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Diameter of the center hole.
         /// </summary>
-        public static string centerHole {
+        public static string CenterHole {
             get {
-                return ResourceManager.GetString("centerHole", resourceCulture);
+                return ResourceManager.GetString("CenterHole", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Diameter of hte circumential holes.
         /// </summary>
-        public static string circumentalHoles {
+        public static string CircumentalHoles {
             get {
-                return ResourceManager.GetString("circumentalHoles", resourceCulture);
+                return ResourceManager.GetString("CircumentalHoles", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Count of gear teeth.
         /// </summary>
-        public static string count {
+        public static string Count {
             get {
-                return ResourceManager.GetString("count", resourceCulture);
+                return ResourceManager.GetString("Count", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Depth of the hexagon dip.
         /// </summary>
-        public static string hexagonDepth {
+        public static string HexagonDepth {
             get {
-                return ResourceManager.GetString("hexagonDepth", resourceCulture);
+                return ResourceManager.GetString("HexagonDepth", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Diameter of the hexagon.
         /// </summary>
-        public static string hexagonDiameter {
+        public static string HexagonDiameter {
             get {
-                return ResourceManager.GetString("hexagonDiameter", resourceCulture);
+                return ResourceManager.GetString("HexagonDiameter", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Rigidity of gear unit.
         /// </summary>
-        public static string rigidity {
+        public static string Rigidity {
             get {
-                return ResourceManager.GetString("rigidity", resourceCulture);
+                return ResourceManager.GetString("Rigidity", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Stiffener depth.
         /// </summary>
-        public static string stiffenerDepth {
+        public static string StiffenerDepth {
             get {
-                return ResourceManager.GetString("stiffenerDepth", resourceCulture);
+                return ResourceManager.GetString("StiffenerDepth", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Stiffener width.
         /// </summary>
-        public static string stiffenerWidth {
+        public static string StiffenerWidth {
             get {
-                return ResourceManager.GetString("stiffenerWidth", resourceCulture);
+                return ResourceManager.GetString("StiffenerWidth", resourceCulture);
             }
         }
     }

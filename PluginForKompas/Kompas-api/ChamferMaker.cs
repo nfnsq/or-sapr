@@ -1,5 +1,6 @@
 ﻿using Kompas6API5;
 using Kompas6Constants3D;
+using Global;
 
 namespace PluginForKompas
 {

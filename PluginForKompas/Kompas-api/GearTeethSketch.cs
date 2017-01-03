@@ -10,6 +10,13 @@ namespace PluginForKompas
     /// </summary>
     public static class GearTeethSketch
     {
+        private static Point[] _pointArray = new Point[0];
+        private static ksMathPointParam[] _mathPointArray = new ksMathPointParam[0];
+        private static int _pointArraySize = 0;
+        private static int _mathPointArraySize = 0;
+        private static short _linArc = 1;
+        private static short _arcArc = 2;
+
         /// <summary>
         /// Метод рисует эскиз для выреза зубьев согласно расчетам в работе 1 по ссылке 
         /// http://edu.ascon.ru/source/files/methods/method_osnovy_autoconstruct.pdf
@@ -21,96 +28,85 @@ namespace PluginForKompas
             {
                 ksSketchDefinition def = SketchCreator.MakeSketch();
                 ksDocument2D doc = (ksDocument2D)def.BeginEdit();
-                ///углы
-                double angle0 = 0;
-                double angle90 = 90;
-                double angle180 = 180;
-                double angle270 = 270;
-                double x;
-                double y;
-                short mathPoint = (short)StructType2DEnum.ko_MathPointParam;
+                // углы
+                double[] angle = new double[4] { 0, 90, 180, 270};
+                
+                _pointArraySize = 1;
+                Array.Resize<Point>(ref _pointArray, _pointArraySize);
+                _pointArray[0] = new Point(0, 0);
+
+                // точка 1
+                double[] parameters = new double[] {0, projectionCircle, baseCircle / 2, angle[0], angle[2]};
+                GetPointIntersect(_linArc, parameters);
+
+                // точка 2
+                parameters = new double[] { _mathPointArray[0].x, _mathPointArray[0].y,
+                    baseCircle / 2, angle[0], angle[2], 
+                    0.5 * Math.PI * m, angle[1], angle[3]};
+                GetPointIntersect(_arcArc, parameters);
+                
+
+                // точка 3
+                parameters = new double[] {
+                    _mathPointArray[_mathPointArraySize - 1].x, _mathPointArray[_mathPointArraySize - 1].y, 
+                    mainCircle / 2, angle[0], angle[2], baseCircle / 6, angle[3], angle[1]};
+                GetPointIntersect(_arcArc, parameters);
+                
+                // точка С
+                parameters = new double[] {
+                    _mathPointArray[_mathPointArraySize - 1].x, _mathPointArray[_mathPointArraySize - 1].y, 
+                    projectionCircle / 2, angle[0], angle[2], baseCircle / 6, angle[1], angle[3]};
+                GetPointIntersect(_arcArc, parameters);
+
+                // точка 4
+                parameters = new double[] {
+                    _mathPointArray[_mathPointArraySize - 2].x, _mathPointArray[_mathPointArraySize - 2].y, 
+                    mainCircle / 2, angle[0], angle[2], baseCircle / 6, angle[1], angle[3]};
+                GetPointIntersect(_arcArc, parameters);
+                 
+                // точка F
+                parameters = new double[] { 
+                    _mathPointArray[_mathPointArraySize - 1].x, _mathPointArray[_mathPointArraySize - 1].y,
+                    troughsCircle / 2, angle[0], angle[2]};
+                GetPointIntersect(_linArc, parameters);
 
 
+                // точка 5
+                parameters = new double[] {
+                    _mathPointArray[0].x, _mathPointArray[0].y,
+                    baseCircle / 2, angle[0], angle[2], 0.75 * Math.PI * m, angle[1], angle[3]};
+                GetPointIntersect(_arcArc, parameters);
+                
 
-                ksMathPointParam p1 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-
-
-                ///точка 1                
-                Point point1 = new Point(0, 0);
-                Point point2 = new Point(0, projectionCircle);
-                PointIntersect.LinArc(point1, point2, baseCircle / 2, angle0, angle180, p1);
-
-                ///точка 2
-                point1 = new Point(0, 0);
-                point2 = new Point(p1.x, p1.y);
-                ksMathPointParam p2 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, baseCircle / 2, angle0, angle180,
-                                        point2, 0.5 * Math.PI * m, angle90, angle270, p2);
-
-                ///точка 3
-                point2 = new Point(p2.x, p2.y);
-                ksMathPointParam p3 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, mainCircle / 2,
-                                        angle0, angle180, point2, baseCircle / 6, angle270, angle90, p3);
-
-                ///точка C
-                point2 = new Point(p3.x, p3.y);
-                ksMathPointParam pC = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, projectionCircle / 2, angle0, angle180,
-                                        point2, baseCircle / 6, angle90, angle270, pC);
-
-                ///точка 4
-                ksMathPointParam p4 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, mainCircle / 2, angle0, angle180,
-                                        point2, baseCircle / 6, angle90, angle270, p4);
-
-
-                ///точка F
-                point2 = new Point(p4.x, p4.y);
-                ksMathPointParam pF = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.LinArc(point1, point2,
-                                        troughsCircle / 2, angle0, angle180, pF);
-
-                ///точка 5
-                point2 = new Point(p1.x, p1.y);
-                ksMathPointParam p5 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                PointIntersect.ArcArc(point1, baseCircle / 2, angle0, angle180,
-                                        point2, 0.75 * Math.PI * m, angle90, angle270, p5);
-
-                ///точка А
-                ksMathPointParam pA = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                KompasApp.Mat.ksSymmetry(pC.x, pC.y, 0, 0, p5.x, p5.y, out x, out y);
-                pA.x = x;
-                pA.y = y;
+                // точка А
+                GetSymmetry(3);
 
                 ///точка D
-                ksMathPointParam pD = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                KompasApp.Mat.ksSymmetry(pF.x, pF.y, 0, 0, p5.x, p5.y, out x, out y);
-                pD.x = x;
-                pD.y = y;
+                GetSymmetry(5);
 
                 ///точка 3'
-                ksMathPointParam p3s = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                KompasApp.Mat.ksSymmetry(p3.x, p3.y, 0, 0, p5.x, p5.y, out x, out y);
-                p3s.x = x;
-                p3s.y = y;
+                GetSymmetry(2);
 
                 ///точка 4'
-                ksMathPointParam p4s = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                KompasApp.Mat.ksSymmetry(p4.x, p4.y, 0, 0, p5.x, p5.y, out x, out y);
-                p4s.x = x;
-                p4s.y = y;
+                GetSymmetry(4);
 
-                ksMathPointParam p0 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
-                p0.x = 0;
-                p0.y = 0;
+                _mathPointArraySize++;
+                Array.Resize<ksMathPointParam>(ref _mathPointArray, _mathPointArraySize);
+                short mathPoint = (short)StructType2DEnum.ko_MathPointParam;
+                _mathPointArray[_mathPointArraySize - 1] = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
+                _mathPointArray[_mathPointArraySize - 1].x = 0;
+                _mathPointArray[_mathPointArraySize - 1].y = 0;
 
-                doc.ksArcByPoint(p3.x, p3.y, baseCircle / 6, pC.x, pC.y, p4.x, p4.y, 1, 1);
-                doc.ksArcByPoint(p3s.x, p3s.y, baseCircle / 6, p4s.x, p4s.y, pA.x, pA.y, 1, 1);
-                doc.ksArcByPoint(p0.x, p0.y, troughsCircle / 2, pF.x, pF.y, pD.x, pD.y, 1, 1);
-                doc.ksArcByPoint(p0.x, p0.y, projectionCircle / 2, pC.x, pC.y, pA.x, pA.y, 1, 1);
-                doc.ksLineSeg(p4.x, p4.y, pF.x, pF.y, 1);
-                doc.ksLineSeg(p4s.x, p4s.y, pD.x, pD.y, 1);
+                doc.ksArcByPoint(_mathPointArray[2].x, _mathPointArray[2].y, baseCircle / 6, 
+                    _mathPointArray[3].x, _mathPointArray[3].y, _mathPointArray[4].x, _mathPointArray[4].y, 1, 1);
+                doc.ksArcByPoint(_mathPointArray[9].x, _mathPointArray[9].y, baseCircle / 6, 
+                    _mathPointArray[10].x, _mathPointArray[10].y, _mathPointArray[7].x, _mathPointArray[7].y, 1, 1);
+                doc.ksArcByPoint(_mathPointArray[11].x, _mathPointArray[11].y, troughsCircle / 2, 
+                    _mathPointArray[5].x, _mathPointArray[5].y, _mathPointArray[8].x, _mathPointArray[8].y, 1, 1);
+                doc.ksArcByPoint(_mathPointArray[11].x, _mathPointArray[11].y, projectionCircle / 2, 
+                    _mathPointArray[3].x, _mathPointArray[3].y, _mathPointArray[7].x, _mathPointArray[7].y, 1, 1);
+                doc.ksLineSeg(_mathPointArray[4].x, _mathPointArray[4].y, _mathPointArray[5].x, _mathPointArray[5].y, 1);
+                doc.ksLineSeg(_mathPointArray[10].x, _mathPointArray[10].y, _mathPointArray[8].x, _mathPointArray[8].y, 1);
 
                 def.EndEdit();
                 return true;
@@ -119,6 +115,49 @@ namespace PluginForKompas
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Метод для нахождения точки пересечения
+        /// </summary>
+        private static void GetPointIntersect(short type, double[] parameters)
+        {
+            short mathPoint = (short)StructType2DEnum.ko_MathPointParam;
+
+            _mathPointArraySize++;
+            Array.Resize<ksMathPointParam>(ref _mathPointArray, _mathPointArraySize);
+            _mathPointArray[_mathPointArraySize - 1] = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
+
+            _pointArraySize++;
+            Array.Resize<Point>(ref _pointArray, _pointArraySize);
+            _pointArray[_pointArraySize - 1] = new Point(parameters[0], parameters[1]);
+            if (type == _linArc)
+                PointIntersect.LinArc(_pointArray[0], 
+                    _pointArray[_pointArraySize - 1], parameters[2], parameters[3], parameters[4], 
+                    _mathPointArray[_mathPointArraySize - 1]);
+            if (type == _arcArc)
+                PointIntersect.ArcArc(_pointArray[0], parameters[2], parameters[3], parameters[4],
+                    _pointArray[_pointArraySize - 1], parameters[5], parameters[6], parameters[7],
+                    _mathPointArray[_mathPointArraySize - 1]);
+        }
+        
+        /// <summary>
+        /// Метод для нахождения симметричной точки
+        /// </summary>
+        private static void GetSymmetry(int index)
+        {
+            short mathPoint = (short)StructType2DEnum.ko_MathPointParam;
+
+            _mathPointArraySize++;
+            Array.Resize<ksMathPointParam>(ref _mathPointArray, _mathPointArraySize);
+            _mathPointArray[_mathPointArraySize - 1] = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
+            
+            double x;
+            double y;
+            KompasApp.Mat.ksSymmetry(_mathPointArray[index].x, _mathPointArray[index].y, 0, 0,
+                _mathPointArray[6].x, _mathPointArray[6].y, out x, out y);
+            _mathPointArray[_mathPointArraySize - 1].x = x;
+            _mathPointArray[_mathPointArraySize - 1].y = y;
         }
     }
 }
