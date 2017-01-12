@@ -4,7 +4,6 @@ using PluginForKompas;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
-using Global;
 
 namespace View
 {
@@ -32,7 +31,7 @@ namespace View
                 try
                 {
                     GearBuilder Gear = new GearBuilder(param);
-                    Gear.New();
+                    Gear.CreateGear();
                 }
                 catch
                 {
@@ -65,21 +64,21 @@ namespace View
                                 parameters[length - 1].Value = double.Parse(textbox.Text,
                                     CultureInfo.InvariantCulture);
                                 if (textbox.Name == countOfGearTeethTextBox.Name)
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.Count;
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.Count;
                                 if (textbox.Name == rigidityOfGeatUnitTextBox.Name)
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.Rigidity;
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.Rigidity;
                                 if (textbox.Name == diameterOfTheCenterHoleTextBox.Name)
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.CenterHole;
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.CenterHole;
                                 if (textbox.Name == diameterOfTheCircumentialHolesTextBox.Name)
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.CircumentalHoles;
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.CircumentalHoles;
                                 if (textbox.Name == diameterOfTheHeaxagonCircumscribedCircleTextBox.Name)
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.HexagonDiameter;
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.HexagonDiameter;
                                 if (textbox.Name == depthOfTheHexagonDipTextBox.Name)
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.HexagonDepth;
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.HexagonDepth;
                                 if (textbox.Name == stiffenersWidthTextBox.Name)
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.StiffenerWidth;
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.StiffenerWidth;
                                 if (textbox.Name == stiffenerDepthTextBox.Name)
-                                    parameters[length - 1].Descrpiption = Global.Properties.Resources.StiffenerDepth;
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.StiffenerDepth;
                             }
                         }
                     }

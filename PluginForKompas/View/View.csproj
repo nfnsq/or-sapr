@@ -58,15 +58,6 @@
     <EmbeddedResource Include="GearConstructingForm.resx">
       <DependentUpon>GearConstructingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,10 +140,6 @@
     <ProjectReference Include="..\GearCreator\GearCreator.csproj">
       <Project>{0b383148-64fe-4127-82ab-61c4e95f9324}</Project>
       <Name>GearCreator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Global\Global.csproj">
-      <Project>{10cca96c-60bc-4669-8905-8dc38d512dc9}</Project>
-      <Name>Global</Name>
     </ProjectReference>
     <ProjectReference Include="..\Kompas-api\Kompas-api.csproj">
       <Project>{2be4a84a-e7f7-4d70-97fa-a4c2bf659a47}</Project>

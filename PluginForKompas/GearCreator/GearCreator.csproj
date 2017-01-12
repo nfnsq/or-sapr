@@ -45,8 +45,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataController.cs" />
     <Compile Include="GearBuilder.cs" />
+    <Compile Include="Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Kompas6API2D5COM">
@@ -117,18 +124,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataControl\DataControl.csproj">
-      <Project>{8d31939f-2c8b-4e9c-bc87-1768a3c85ac2}</Project>
-      <Name>DataControl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Global\Global.csproj">
-      <Project>{10cca96c-60bc-4669-8905-8dc38d512dc9}</Project>
-      <Name>Global</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Kompas-api\Kompas-api.csproj">
       <Project>{2be4a84a-e7f7-4d70-97fa-a4c2bf659a47}</Project>
       <Name>Kompas-api</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

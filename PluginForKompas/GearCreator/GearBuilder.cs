@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using Global;
+using PluginForKompas;
 
 namespace PluginForKompas
 {
@@ -24,10 +24,10 @@ namespace PluginForKompas
         private double _externalArcOfDipDiam;
         private double _gearDepth;
         // ширина фаски 
-        public double _chamferWidth = 10;
+        private double _chamferWidth = 10;
         // обьявляем угол 54 в градусах, который будет необходим 
         // для расчетов координат точек ребра жесткости 
-        public double _angle54 = 54 * Math.PI / 180;
+        private double _angle54 = 54 * Math.PI / 180;
         /// <summary>
         /// Конструктор с параметром
         /// </summary>
@@ -53,7 +53,7 @@ namespace PluginForKompas
         /// <summary>
         /// Создание нового документа для построения детали
         /// </summary>
-        public bool New()
+        public bool CreateGear()
         {
             try
             {
@@ -79,8 +79,6 @@ namespace PluginForKompas
         /// </summary>
         private void DoDetail()
         {
-
-
             // построить цилиндр
             Point center = new Point(0, 0);
             CircleSketch.DrawCircle(center, _projectionCircle / 2, 1);

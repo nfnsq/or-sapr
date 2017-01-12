@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Global;
+using PluginForKompas;
 
 namespace PluginForKompas
 {
@@ -19,7 +19,7 @@ namespace PluginForKompas
         {
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i].Descrpiption == Global.Properties.Resources.Count)
+                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.Count)
                 {
                     // количество зубьев может быть от 17 до 40 [Википедия]
                     if (CheckData(data[i], 17, 40))
@@ -28,7 +28,7 @@ namespace PluginForKompas
                     }
                     else return false;
                 }
-                if (data[i].Descrpiption == Global.Properties.Resources.Rigidity)
+                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.Rigidity)
                 {
                     // модуль жесткости может быть от 0.5 до 50 [ГОСТ 9563-60]
                     if (CheckData(data[i], 0.5, 50))
@@ -41,7 +41,7 @@ namespace PluginForKompas
 
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i].Descrpiption == Global.Properties.Resources.CenterHole)
+                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.CenterHole)
                 {
                     // диаметр отверстия в центре от 5
                     double min = 5;
@@ -59,7 +59,7 @@ namespace PluginForKompas
             }
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i].Descrpiption == Global.Properties.Resources.CircumentalHoles)
+                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.CircumentalHoles)
                 {
                     // диаметр отверстий по окружноти от 5
                     double min = 5;
@@ -68,7 +68,7 @@ namespace PluginForKompas
                     if (!CheckData(data[i], min, max))
                         return false;
                 }
-                if (data[i].Descrpiption == Global.Properties.Resources.HexagonDiameter)
+                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.HexagonDiameter)
                 {
                     // минимальный диаметр описанной окружности шестиугольника
                     // формула для расчета описанной окружности в зависимости от вписанной
@@ -79,7 +79,7 @@ namespace PluginForKompas
                     if (!CheckData(data[i], min, max))
                         return false;
                 }
-                if (data[i].Descrpiption == Global.Properties.Resources.HexagonDepth)
+                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.HexagonDepth)
                 {
                     // глубина выдавливания выреза под шестигранник
                     // от 0 до 1/2 от толщины шестерни
@@ -87,13 +87,13 @@ namespace PluginForKompas
                     if (!CheckData(data[i], 0, gearDepth / 2))
                         return false;
                 }
-                if (data[i].Descrpiption == Global.Properties.Resources.StiffenerWidth)
+                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.StiffenerWidth)
                 {
                     // ширина ребра жесткости от 12 до 22, просто потому что так захотелось :)
                     if (!CheckData(data[i], 12, 22))
                         return false;
                 }
-                if (data[i].Descrpiption == Global.Properties.Resources.StiffenerDepth)
+                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.StiffenerDepth)
                 {
                     // глубина выдавливания выреза под углубления
                     // от 0 до 1/2 от глубины шестерни

@@ -64,13 +64,5 @@ namespace PluginForKompas
                 }
             }
         }
-
-        /// <summary>
-        /// Метод закрывает приложение КОМПАС
-        /// </summary>
-        public static void Exit()
-        {
-            Kompas.Quit();
-        }
     }
 }

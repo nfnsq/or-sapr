@@ -92,6 +92,7 @@
     <Compile Include="GearTeethSketch.cs" />
     <Compile Include="HexagonSketch.cs" />
     <Compile Include="KompasApp.cs" />
+    <Compile Include="Point3d.cs" />
     <Compile Include="PointIntersect.cs" />
     <Compile Include="HoleMaker.cs" />
     <Compile Include="ExtrusionMaker.cs" />
@@ -100,12 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Global\Global.csproj">
-      <Project>{10cca96c-60bc-4669-8905-8dc38d512dc9}</Project>
-      <Name>Global</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

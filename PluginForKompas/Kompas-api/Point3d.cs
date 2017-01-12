@@ -1,4 +1,4 @@
-﻿namespace Global
+﻿namespace PluginForKompas
 {
     public struct Point3d
     {

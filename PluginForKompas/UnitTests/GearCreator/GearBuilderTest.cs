@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using PluginForKompas;
-using Global;
+using PluginForKompas;
 
 namespace UnitTests.GearCreator
 {
@@ -30,17 +30,17 @@ namespace UnitTests.GearCreator
             {
                 param[i].Value = list[i];
             }
-            param[0].Descrpiption = Global.Properties.Resources.HexagonDepth;
-            param[1].Descrpiption = Global.Properties.Resources.StiffenerDepth;
-            param[2].Descrpiption = Global.Properties.Resources.StiffenerWidth;
-            param[3].Descrpiption = Global.Properties.Resources.HexagonDiameter;
-            param[4].Descrpiption = Global.Properties.Resources.CircumentalHoles;
-            param[5].Descrpiption = Global.Properties.Resources.CenterHole; 
-            param[6].Descrpiption = Global.Properties.Resources.Rigidity;
-            param[7].Descrpiption = Global.Properties.Resources.Count;
+            param[0].Descrpiption = PluginForKompas.Properties.Resources.HexagonDepth;
+            param[1].Descrpiption = PluginForKompas.Properties.Resources.StiffenerDepth;
+            param[2].Descrpiption = PluginForKompas.Properties.Resources.StiffenerWidth;
+            param[3].Descrpiption = PluginForKompas.Properties.Resources.HexagonDiameter;
+            param[4].Descrpiption = PluginForKompas.Properties.Resources.CircumentalHoles;
+            param[5].Descrpiption = PluginForKompas.Properties.Resources.CenterHole; 
+            param[6].Descrpiption = PluginForKompas.Properties.Resources.Rigidity;
+            param[7].Descrpiption = PluginForKompas.Properties.Resources.Count;
 
             GearBuilder Gear = new GearBuilder(param);
-            Assert.AreEqual(res, Gear.New());
+            Assert.AreEqual(res, Gear.CreateGear());
         }
     }
 }
