@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using PluginForKompas;
+using System.Collections.Generic;
 
 namespace PluginForKompas
 {
@@ -17,89 +18,49 @@ namespace PluginForKompas
         public bool Validating(double internalArcOfDipDiam, double externalArcOfDipDiam,
             double chamferWidth, double gearDepth, params Parameter[] data)
         {
-            for (int i = 0; i < data.Length; i++)
+            var tuple = new Dictionary<string, Tuple<double, double>>();
+            tuple.Add(PluginForKompas.Properties.Resources.Count, new Tuple<double,double> (17, 40));
+            tuple.Add(PluginForKompas.Properties.Resources.Rigidity, new Tuple<double, double>(0.5, 50));
+            for (int i = 0; i < tuple.Count; i++)
             {
-                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.Count)
-                {
-                    // количество зубьев может быть от 17 до 40 [Википедия]
-                    if (CheckData(data[i], 17, 40))
+                var tmp = tuple[data[i].Descrpiption];
+                    if (CheckData(data[i], tmp.Item1, tmp.Item2))
                     {
                         _teethCount = data[i].Value;
                     }
                     else return false;
-                }
-                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.Rigidity)
-                {
-                    // модуль жесткости может быть от 0.5 до 50 [ГОСТ 9563-60]
-                    if (CheckData(data[i], 0.5, 50))
-                    {
-                        _rigidity = data[i].Value;
-                    }
-                    else return false;
-                }
             }
 
-            for (int i = 0; i < data.Length; i++)
+            double max = (internalArcOfDipDiam - chamferWidth) * Math.Cos(30 * Math.PI / 180);
+            tuple.Add(PluginForKompas.Properties.Resources.CenterHole, new Tuple<double, double>(5, max));
+            for (int i = 0; i < tuple.Count; i++)
             {
-                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.CenterHole)
-                {
-                    // диаметр отверстия в центре от 5
-                    double min = 5;
-                    // до диаметра вписанной окружности наибольшего шестиугольника
-                    // которую можно поместить внутри окружности с диаметром меньшей дуги углубления
-                    // формула расчета вписанной окружности правильного шестиугольника в зависмости от
-                    // описанной окружности d = D * cos(30)
-                    double max = (internalArcOfDipDiam - chamferWidth) * Math.Cos(30 * Math.PI / 180);
-                    if (CheckData(data[i], min, max))
+                var tmp = tuple[data[i].Descrpiption];
+                if (CheckData(data[i], tmp.Item1, tmp.Item2))
                     {
                         _centerHoleDiam = data[i].Value;
                     }
                     else return false;
-                }
             }
-            for (int i = 0; i < data.Length; i++)
-            {
-                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.CircumentalHoles)
-                {
-                    // диаметр отверстий по окружноти от 5
-                    double min = 5;
-                    // до ширины углубления
-                    double max = (externalArcOfDipDiam - internalArcOfDipDiam - chamferWidth) / 2;
-                    if (!CheckData(data[i], min, max))
-                        return false;
-                }
-                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.HexagonDiameter)
-                {
-                    // минимальный диаметр описанной окружности шестиугольника
-                    // формула для расчета описанной окружности в зависимости от вписанной
-                    double min = _centerHoleDiam / Math.Cos(30 * Math.PI / 180);
-                    // максимальный диаметр высчитывается как диаметр меньшей дуги углубления 
-                    // минус ширина фаски
-                    double max = internalArcOfDipDiam - chamferWidth;
-                    if (!CheckData(data[i], min, max))
-                        return false;
-                }
-                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.HexagonDepth)
-                {
-                    // глубина выдавливания выреза под шестигранник
-                    // от 0 до 1/2 от толщины шестерни
 
-                    if (!CheckData(data[i], 0, gearDepth / 2))
-                        return false;
-                }
-                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.StiffenerWidth)
-                {
-                    // ширина ребра жесткости от 12 до 22, просто потому что так захотелось :)
-                    if (!CheckData(data[i], 12, 22))
-                        return false;
-                }
-                if (data[i].Descrpiption == PluginForKompas.Properties.Resources.StiffenerDepth)
-                {
-                    // глубина выдавливания выреза под углубления
-                    // от 0 до 1/2 от глубины шестерни
-                    if (!CheckData(data[i], 0, gearDepth / 2))
-                        return false;
-                }
+            max = (externalArcOfDipDiam - internalArcOfDipDiam - chamferWidth) / 2;
+            tuple.Add(PluginForKompas.Properties.Resources.CircumentalHoles, new Tuple<double, double>(5, max));
+
+            double min = _centerHoleDiam / Math.Cos(30 * Math.PI / 180);
+            max = internalArcOfDipDiam - chamferWidth;
+            tuple.Add(PluginForKompas.Properties.Resources.HexagonDiameter, new Tuple<double, double>(min, max));
+
+            max = gearDepth / 2;
+            tuple.Add(PluginForKompas.Properties.Resources.HexagonDepth, new Tuple<double, double>(0, max));
+
+            tuple.Add(PluginForKompas.Properties.Resources.StiffenerWidth, new Tuple<double, double>(12, 22));
+            tuple.Add(PluginForKompas.Properties.Resources.StiffenerDepth, new Tuple<double, double>(0, max));
+
+            for (int i = 0; i < tuple.Count; i++)
+            {
+                var tmp = tuple[data[i].Descrpiption];
+                if (!CheckData(data[i], min, max))
+                    return false;
             }
             return true;
         }
