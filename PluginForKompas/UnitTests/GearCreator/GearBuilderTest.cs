@@ -1,11 +1,11 @@
 ﻿using NUnit.Framework;
 using PluginForKompas;
-using PluginForKompas;
+using Kompas6API5;
 
 namespace UnitTests.GearCreator
 {
     [TestFixture]
-    class GearBuilderTest
+    public class GearBuilderTest
     {
         [TestCase(true, 18, 15, 17, 35, 40, 30, 17, 18, TestName = "Тестирование при корректных значениях параметров")]
         [TestCase(false, 18, 15, 17, 35, 40, 30, 17, 1, TestName = "Тестирование при некорректных значениях параметров")]
@@ -25,6 +25,8 @@ namespace UnitTests.GearCreator
         public void Create(bool res, params double[] list)
         {
             KompasApp.GetActiveApp();
+            if (PluginForKompas.KompasApp.Kompas == null)
+                KompasApp.NewApp();
             Parameter[] param = new Parameter[list.Length];
             for (int i = 0; i < list.Length; i++)
             {

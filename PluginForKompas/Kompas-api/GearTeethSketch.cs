@@ -81,13 +81,13 @@ namespace PluginForKompas
                 // точка А
                 GetSymmetry(3);
 
-                ///точка D
+                // точка D
                 GetSymmetry(5);
 
-                ///точка 3'
+                // точка 3'
                 GetSymmetry(2);
 
-                ///точка 4'
+                // точка 4'
                 GetSymmetry(4);
 
                 _mathPointArraySize++;

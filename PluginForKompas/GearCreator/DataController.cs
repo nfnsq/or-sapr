@@ -5,44 +5,33 @@ using System.Collections.Generic;
 
 namespace PluginForKompas
 {
+    /// <summary>
+    /// Сущность для проверки входных данных
+    /// </summary>
     public class DataController
     {
         private double _teethCount;
-        private double _rigidity;
         private double _centerHoleDiam;
+        
         /// <summary>
-        /// Метод выполняет проверку списка параметров
+        /// Метод проверяет список параметров
         /// </summary>
-        /// <param name="data">Список параметров</param>
+        /// <param name="internalArcOfDipDiam"></param>
+        /// <param name="externalArcOfDipDiam"></param>
+        /// <param name="chamferWidth"></param>
+        /// <param name="gearDepth"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
         public bool Validating(double internalArcOfDipDiam, double externalArcOfDipDiam,
             double chamferWidth, double gearDepth, params Parameter[] data)
         {
+            _teethCount = data[7].Value;
+            _centerHoleDiam = data[5].Value;
             var tuple = new Dictionary<string, Tuple<double, double>>();
             tuple.Add(PluginForKompas.Properties.Resources.Count, new Tuple<double,double> (17, 40));
             tuple.Add(PluginForKompas.Properties.Resources.Rigidity, new Tuple<double, double>(0.5, 50));
-            for (int i = 0; i < tuple.Count; i++)
-            {
-                var tmp = tuple[data[i].Descrpiption];
-                    if (CheckData(data[i], tmp.Item1, tmp.Item2))
-                    {
-                        _teethCount = data[i].Value;
-                    }
-                    else return false;
-            }
-
             double max = (internalArcOfDipDiam - chamferWidth) * Math.Cos(30 * Math.PI / 180);
             tuple.Add(PluginForKompas.Properties.Resources.CenterHole, new Tuple<double, double>(5, max));
-            for (int i = 0; i < tuple.Count; i++)
-            {
-                var tmp = tuple[data[i].Descrpiption];
-                if (CheckData(data[i], tmp.Item1, tmp.Item2))
-                    {
-                        _centerHoleDiam = data[i].Value;
-                    }
-                    else return false;
-            }
-
             max = (externalArcOfDipDiam - internalArcOfDipDiam - chamferWidth) / 2;
             tuple.Add(PluginForKompas.Properties.Resources.CircumentalHoles, new Tuple<double, double>(5, max));
 
@@ -59,7 +48,7 @@ namespace PluginForKompas
             for (int i = 0; i < tuple.Count; i++)
             {
                 var tmp = tuple[data[i].Descrpiption];
-                if (!CheckData(data[i], min, max))
+                if (!CheckData(data[i], tmp.Item1, tmp.Item2))
                     return false;
             }
             return true;

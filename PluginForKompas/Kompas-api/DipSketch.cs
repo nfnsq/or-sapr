@@ -13,9 +13,13 @@ namespace PluginForKompas
         /// <summary>
         /// Метод рисует эскиз в виде части сектора
         /// </summary>
-        /// <param name="m">Модуль жесткости шестерни</param>
-        /// <param name="z">Количество зубьев</param>
-        /// <param name="k">Тольщина ребер жесткости</param>
+        /// <param name="internalArcOfDipRadius">Внутренний диаметр выреза</param>
+        /// <param name="externalArcOfDipRadius">Внещний диаметр выреза</param>
+        /// <param name="m">Модуль жесткости</param>
+        /// <param name="z">Количество зубъев</param>
+        /// <param name="k">Ширина ребер жескости</param>
+        /// <param name="angle54">Угол 54 градусов</param>
+        /// <returns></returns>
         public static bool DrawDipSketch(double internalArcOfDipRadius, double externalArcOfDipRadius,
             double m, double z, double k, double angle54)
         {
@@ -37,7 +41,7 @@ namespace PluginForKompas
                 p1.x = -l / Math.Sin(angle54);
                 p1.y = 0;
 
-                ///координаты точки на ребре жесткости
+                // координаты точки на ребре жесткости
                 ksMathPointParam p2 = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
                 p2.x = (Math.Cos(angle54) * m * z)
                     + p1.x;
@@ -45,13 +49,13 @@ namespace PluginForKompas
                 Point point1 = new Point(p1.x, p1.y);
                 Point point2 = new Point(p2.x, p2.y);
 
-                ///координаты точки пересечения большей дуги углубления 
-                ///и прямой проходящей вдоль ребра жесткости 
+                // координаты точки пересечения большей дуги углубления 
+                // и прямой проходящей вдоль ребра жесткости 
                 ksMathPointParam pA = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
                 PointIntersect.LinArc(point1, point2, internalArcOfDipRadius, a0, a180, pA);
 
-                ///координаты точки пересечения меньшей дуги углубления 
-                ///и прямой проходящей вдоль ребра жесткости 
+                // координаты точки пересечения меньшей дуги углубления 
+                // и прямой проходящей вдоль ребра жесткости 
                 ksMathPointParam pB = (ksMathPointParam)KompasApp.Kompas.GetParamStruct(mathPoint);
                 PointIntersect.LinArc(point1, point2, externalArcOfDipRadius, a0, a180, pB);
 

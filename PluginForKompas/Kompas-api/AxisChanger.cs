@@ -8,6 +8,9 @@ using Kompas6Constants3D;
 
 namespace PluginForKompas
 {
+    /// <summary>
+    /// Сущность для изменения базовой плоскости
+    /// </summary>
     public static class AxisChanger
     {
         /// <summary>

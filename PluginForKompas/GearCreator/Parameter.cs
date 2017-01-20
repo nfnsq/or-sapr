@@ -1,14 +1,18 @@
 ﻿namespace PluginForKompas
 {
+    /// <summary>
+    /// Сущность для описания параметров модели
+    /// </summary>
     public struct Parameter
     {
-        public string Descrpiption;
-        public double Value;
-
-        public Parameter(string descrip, double param)
-        {
-            Descrpiption = descrip;
-            Value = param;
-        }
+        /// <summary>
+        /// Оисание параметра
+        /// </summary>
+        public string Descrpiption{ get;set; }
+        
+        /// <summary>
+        /// Значение параметра
+        /// </summary>
+        public double Value{ get; set; }
     }
 }

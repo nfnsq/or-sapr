@@ -7,15 +7,28 @@ using System.ComponentModel;
 
 namespace View
 {
+    /// <summary>
+    /// СУщность для создания пользовательского 
+    /// интерфейса программы
+    /// </summary>
     public partial class GearConstructingForm : Form
     {
         private double _rigidity = 0;
         private double _teethCount = 0;
-
+        
+        /// <summary>
+        /// Конструктор формы, инициализирующий его компоненты
+        /// </summary>
         public GearConstructingForm()
         {
             InitializeComponent();
+            KompasApp.GetActiveApp();
+            if (KompasApp.Kompas != null)
+            {
+                GotActiveApp();
+            }
         }
+
 
         /// <summary>
         /// Создать новую деталь
@@ -99,9 +112,6 @@ namespace View
         /// <summary>
         /// Метод для проверки основных параметров шестерни
         /// </summary>
-        /// <param name="regex">Регулярное выражение</param>
-        /// <param name="text">Проверяемая строка</param>
-        /// <param name="e">Данные отменяемого события</param>
         private void DataValidating(object sender, CancelEventArgs e)
         {
             Regex regex = new Regex("^[0-9]+$");
@@ -170,7 +180,12 @@ namespace View
         private void startButton_Click(object sender, EventArgs e)
         {
             startToolStripStatusLabel.Text = "Kompas starting...";
-            KompasApp.GetActiveApp();
+            KompasApp.NewApp();
+            GotActiveApp();
+        }
+
+        private void GotActiveApp()
+        {
             countOfGearTeethTextBox.Enabled = true;
             rigidityOfGeatUnitTextBox.Enabled = true;
             buildButton.Enabled = true;
