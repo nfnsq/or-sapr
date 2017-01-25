@@ -6,8 +6,19 @@ namespace PluginForKompas
     /// <summary>
     /// Класс рисования окружности
     /// </summary>
-    public static class CircleSketch
+    public class CircleSketch
     {
+        private KompasApp _app;
+
+        /// <summary>
+        /// Коструктор с параметром
+        /// </summary>
+        /// <param name="app">Приложение компас</param>
+        public CircleSketch(KompasApp app)
+        {
+            this._app = app;
+        }
+
         /// <summary>
         /// Метод создает эскиз окружности
         /// </summary>
@@ -15,11 +26,12 @@ namespace PluginForKompas
         /// <param name="radius">Радиус окружности</param>
         /// <param name="lineType">Тип линии</param>
         /// <returns></returns>
-        public static bool DrawCircle(Point coor, double radius, int lineType)
+        public bool DrawCircle(Point coor, double radius, int lineType)
         {
             try
             {
-                ksSketchDefinition def = SketchCreator.MakeSketch();
+                SketchCreator sketchCreator = new SketchCreator(_app);
+                ksSketchDefinition def = sketchCreator.MakeSketch();
                 ksDocument2D doc = (ksDocument2D)def.BeginEdit();
                 doc.ksCircle(coor.X, coor.Y, radius, lineType);
                 def.EndEdit();

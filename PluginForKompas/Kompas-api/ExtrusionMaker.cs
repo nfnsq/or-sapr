@@ -6,21 +6,32 @@ namespace PluginForKompas
     /// <summary>
     /// Класс операции выдавливания
     /// </summary>
-    public static class ExtrusionMaker
+    public class ExtrusionMaker
     {
+        private KompasApp _app;
+
+        /// <summary>
+        /// Коструктор с параметром
+        /// </summary>
+        /// <param name="app">Приложение компас</param>
+        public ExtrusionMaker(KompasApp app)
+        {
+            this._app = app;
+        }
+
         /// <summary>
         /// Метод выполняет операцию выдавливания 
         /// для последнего созданного эскиза
         /// </summary>
         /// <param name="depth">Глубина выдавливания</param>
-        public static bool DoOperationExtrusion(double depth)
+        public  bool DoOperationExtrusion(double depth)
         {
             try
             {
-                ksEntityCollection coll = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_sketch);
+                ksEntityCollection coll = (ksEntityCollection)_app.Part.EntityCollection((short)Obj3dType.o3d_sketch);
                 int i = coll.GetCount();
                 ksEntity sketch = coll.GetByIndex(i - 1);
-                ksEntity entityExtr = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_baseExtrusion);
+                ksEntity entityExtr = (ksEntity)_app.Part.NewEntity((short)Obj3dType.o3d_baseExtrusion);
                 if (entityExtr != null)
                 {
                     ksBaseExtrusionDefinition extrusionDef = (ksBaseExtrusionDefinition)entityExtr.GetDefinition();

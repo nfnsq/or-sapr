@@ -6,22 +6,33 @@ namespace PluginForKompas
     /// <summary>
     /// Класс для операции "массив по концентрической сетке"
     /// </summary>
-    public static class CircularCopyMaker
+    public class CircularCopyMaker
     {
+        private KompasApp _app;
+
+        /// <summary>
+        /// Коструктор с параметром
+        /// </summary>
+        /// <param name="app">Приложение компас</param>
+        public CircularCopyMaker(KompasApp app)
+        {
+            this._app = app;
+        }
+
         /// <summary>
         /// Метод копирует последнюю операцию 
         /// по концентрической окружности относительно оси OY
         /// </summary>
         /// <param name="count">Количество копий</param>
-        public static bool CreateOperationCircPartArray(int count)
+        public bool CreateOperationCircPartArray(int count)
         {
             try
             {
-                ksEntityCollection elemCol = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_cutExtrusion);
+                ksEntityCollection elemCol = (ksEntityCollection)_app.Part.EntityCollection((short)Obj3dType.o3d_cutExtrusion);
                 if ((elemCol != null) && (elemCol.GetCount() != 0))
                 {
-                    ksEntity axis = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_axisOY);
-                    ksEntity circCopy = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_circularCopy);
+                    ksEntity axis = (ksEntity)_app.Part.NewEntity((short)Obj3dType.o3d_axisOY);
+                    ksEntity circCopy = (ksEntity)_app.Part.NewEntity((short)Obj3dType.o3d_circularCopy);
                     ksCircularCopyDefinition CopyDef = (ksCircularCopyDefinition)circCopy.GetDefinition();
 
                     if (CopyDef != null)
@@ -47,22 +58,22 @@ namespace PluginForKompas
         }
 
         /// <summary>
-        /// МЕтод копирует последние 5 операции 
+        /// Метод для копирования фаски
         /// по концентрической окружности относительно оси OY
         /// </summary>
         /// <param name="count"></param>
-        public static bool CreateChamferCircPartArray(int count)
+        public bool CreateChamferCircPartArray(int count)
         {
             try
             {
-                ksEntityCollection elemCol = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_cutExtrusion);
-                ksEntityCollection chamCol = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_chamfer);
+                ksEntityCollection elemCol = (ksEntityCollection)_app.Part.EntityCollection((short)Obj3dType.o3d_cutExtrusion);
+                ksEntityCollection chamCol = (ksEntityCollection)_app.Part.EntityCollection((short)Obj3dType.o3d_chamfer);
 
                 if ((elemCol != null) && (elemCol.GetCount() != 0)
                     && (chamCol != null) && (chamCol.GetCount() != 0))
                 {
-                    ksEntity axis = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_axisOY);
-                    ksEntity circCopy = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_circularCopy);
+                    ksEntity axis = (ksEntity)_app.Part.NewEntity((short)Obj3dType.o3d_axisOY);
+                    ksEntity circCopy = (ksEntity)_app.Part.NewEntity((short)Obj3dType.o3d_circularCopy);
                     ksCircularCopyDefinition CopyDef = (ksCircularCopyDefinition)circCopy.GetDefinition();
 
                     if (CopyDef != null)

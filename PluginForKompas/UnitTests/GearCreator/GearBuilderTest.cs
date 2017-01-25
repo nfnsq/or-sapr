@@ -24,9 +24,10 @@ namespace UnitTests.GearCreator
         
         public void Create(bool res, params double[] list)
         {
-            KompasApp.GetActiveApp();
-            if (PluginForKompas.KompasApp.Kompas == null)
-                KompasApp.NewApp();
+            KompasApp app = new KompasApp();
+            app.GetActiveApp();
+            if (app.Kompas == null)
+                app.NewApp();
             Parameter[] param = new Parameter[list.Length];
             for (int i = 0; i < list.Length; i++)
             {
@@ -41,7 +42,7 @@ namespace UnitTests.GearCreator
             param[6].Descrpiption = PluginForKompas.Properties.Resources.Rigidity;
             param[7].Descrpiption = PluginForKompas.Properties.Resources.Count;
 
-            GearBuilder Gear = new GearBuilder(param);
+            GearBuilder Gear = new GearBuilder(app, param);
             Assert.AreEqual(res, Gear.CreateGear());
         }
     }

@@ -11,33 +11,27 @@ namespace PluginForKompas
     /// </summary>
     public class KompasApp
     {
-        /// <summary>
-        /// Указатель на главный интерфейс API системы КОМПАС
-        /// </summary>
-        public static KompasObject Kompas;
-        /// <summary>
-        /// Указатель на интерфейс документа трехмерной модели
-        /// </summary>
-        public static ksDocument3D Doc3d;
-        /// <summary>
-        /// Указатель на интерфейс главного компонента
-        /// </summary>
-        public static ksPart Part;
-        /// <summary>
-        /// Указатель на интерфейс базовой плоскости XOZ
-        /// </summary>
-        public static ksEntity BasePlane;
-        /// <summary>
-        /// Указатель на интерфейс для работы с математическими функциями
-        /// </summary>
-        public static ksMathematic2D Mat;
+        // Указатель на главный интерфейс API системы КОМПАС
+        public KompasObject Kompas;
+
+        // Указатель на интерфейс документа трехмерной модели
+        public ksDocument3D Doc3d;
+
+        // Указатель на интерфейс главного компонента
+        public ksPart Part;
+
+        // Указатель на интерфейс базовой плоскости XOZ
+        public ksEntity BasePlane;
+
+        // Указатель на интерфейс для работы с математическими функциями
+        public ksMathematic2D Mat;
 
         /// <summary>
         /// Метод создает новый документ трехмерной 
         /// модели и получает указатель на интерфейс 
         /// главного компонента созданного документа
         /// </summary>
-        public static void CreateNewDoc()
+        public void CreateNewDoc()
         {
             try
             {
@@ -61,7 +55,7 @@ namespace PluginForKompas
         /// Метод получает указатель активного интерфейса
         /// API КОМПАС
         /// </summary>
-        public static void GetActiveApp()
+        public void GetActiveApp()
         {
             if (Kompas == null)
             {
@@ -86,7 +80,7 @@ namespace PluginForKompas
         /// Метод создает новое прилжение Компас и 
         /// получает указатель на главный интерфейс API
         /// </summary>
-        public static void NewApp()
+        public void NewApp()
         {
             
             Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");

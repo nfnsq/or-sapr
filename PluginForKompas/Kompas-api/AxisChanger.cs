@@ -9,25 +9,36 @@ using Kompas6Constants3D;
 namespace PluginForKompas
 {
     /// <summary>
-    /// Сущность для изменения базовой плоскости
+    /// Класс для изменения базовой плоскости
     /// </summary>
-    public static class AxisChanger
+    public class AxisChanger
     {
+        private KompasApp _app;
+
+        /// <summary>
+        /// Коструктор с параметром
+        /// </summary>
+        /// <param name="app">Приложение компас</param>
+        public AxisChanger(KompasApp app)
+        {
+            this._app = app;
+        }
+
         /// <summary>
         /// Метод смещает базовую плоскость по оси OY на заданное расстояние
         /// </summary>
-        public static void MovingBasePlaneByYAxis(double offset, bool direction)
+        public void MovingBasePlaneByYAxis(double offset, bool direction)
         {
-            ksEntity plane = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_planeOffset);
+            ksEntity plane = (ksEntity)_app.Part.NewEntity((short)Obj3dType.o3d_planeOffset);
             ksPlaneOffsetDefinition planeDef = (ksPlaneOffsetDefinition)plane.GetDefinition();
             if (planeDef != null)
             {
-                planeDef.SetPlane(KompasApp.BasePlane);
+                planeDef.SetPlane(_app.BasePlane);
                 planeDef.direction = direction;
                 planeDef.offset = offset;
                 plane.Create();
             }
-            KompasApp.BasePlane = plane;
+            _app.BasePlane = plane;
         }
     }
 }

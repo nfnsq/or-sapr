@@ -6,21 +6,32 @@ namespace PluginForKompas
     /// <summary>
     /// Класс операции вырезать выдавливанием
     /// </summary>
-    public static class HoleMaker
+    public class HoleMaker
     {
+        private KompasApp _app;
+
+        /// <summary>
+        /// Коструктор с параметром
+        /// </summary>
+        /// <param name="app">Приложение компас</param>
+        public HoleMaker(KompasApp app)
+        {
+            this._app = app;
+        }
+
         /// <summary>
         /// Метод выполняет операцию вырезать выдавливанием для 
         /// последнего созданного эскиза
         /// </summary>
         /// <param name="depth">Глубина выдавливания</param>
-        public static bool CutExtrusion(double depth)
+        public bool CutExtrusion(double depth)
         {
             try
             {
-                ksEntityCollection coll = (ksEntityCollection)KompasApp.Part.EntityCollection((short)Obj3dType.o3d_sketch);
+                ksEntityCollection coll = (ksEntityCollection)_app.Part.EntityCollection((short)Obj3dType.o3d_sketch);
                 int i = coll.GetCount();
                 ksEntity sketch = coll.GetByIndex(i - 1);
-                ksEntity entityCutExtr = (ksEntity)KompasApp.Part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
+                ksEntity entityCutExtr = (ksEntity)_app.Part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
                 if (entityCutExtr != null)
                 {
                     ksCutExtrusionDefinition extrusionDef = (ksCutExtrusionDefinition)entityCutExtr.GetDefinition();

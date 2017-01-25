@@ -13,6 +13,7 @@ namespace View
     /// </summary>
     public partial class GearConstructingForm : Form
     {
+        public KompasApp app = new KompasApp();
         private double _rigidity = 0;
         private double _teethCount = 0;
         
@@ -22,8 +23,8 @@ namespace View
         public GearConstructingForm()
         {
             InitializeComponent();
-            KompasApp.GetActiveApp();
-            if (KompasApp.Kompas != null)
+            app.GetActiveApp();
+            if (app.Kompas != null)
             {
                 GotActiveApp();
             }
@@ -43,7 +44,7 @@ namespace View
             {
                 try
                 {
-                    GearBuilder Gear = new GearBuilder(param);
+                    GearBuilder Gear = new GearBuilder(app, param);
                     Gear.CreateGear();
                 }
                 catch
@@ -180,12 +181,15 @@ namespace View
         private void startButton_Click(object sender, EventArgs e)
         {
             startToolStripStatusLabel.Text = "Kompas starting...";
-            KompasApp.NewApp();
+            app.GetActiveApp();
+            if (app.Kompas == null)
+                app.NewApp();
             GotActiveApp();
         }
 
         private void GotActiveApp()
         {
+            startButton.Enabled = false;
             countOfGearTeethTextBox.Enabled = true;
             rigidityOfGeatUnitTextBox.Enabled = true;
             buildButton.Enabled = true;

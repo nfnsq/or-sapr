@@ -17,6 +17,7 @@
             this._y = y;
             this._z = z;
         }
+
         private double _x;
         /// <summary>
         /// Координата Х точки в трехмерном пространстве

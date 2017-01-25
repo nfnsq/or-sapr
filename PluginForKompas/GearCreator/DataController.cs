@@ -29,14 +29,14 @@ namespace PluginForKompas
             _centerHoleDiam = data[5].Value;
             var tuple = new Dictionary<string, Tuple<double, double>>();
             tuple.Add(PluginForKompas.Properties.Resources.Count, new Tuple<double,double> (17, 40));
-            tuple.Add(PluginForKompas.Properties.Resources.Rigidity, new Tuple<double, double>(0.5, 50));
+            tuple.Add(PluginForKompas.Properties.Resources.Rigidity, new Tuple<double, double>(4, 50));
             double max = (internalArcOfDipDiam - chamferWidth) * Math.Cos(30 * Math.PI / 180);
             tuple.Add(PluginForKompas.Properties.Resources.CenterHole, new Tuple<double, double>(5, max));
-            max = (externalArcOfDipDiam - internalArcOfDipDiam - chamferWidth) / 2;
+            max = (externalArcOfDipDiam + internalArcOfDipDiam) / 4;
             tuple.Add(PluginForKompas.Properties.Resources.CircumentalHoles, new Tuple<double, double>(5, max));
 
             double min = _centerHoleDiam / Math.Cos(30 * Math.PI / 180);
-            max = internalArcOfDipDiam - chamferWidth;
+            max = internalArcOfDipDiam - 2 * chamferWidth;
             tuple.Add(PluginForKompas.Properties.Resources.HexagonDiameter, new Tuple<double, double>(min, max));
 
             max = gearDepth / 2;

@@ -1,7 +1,7 @@
 ﻿namespace PluginForKompas
 {
     /// <summary>
-    /// Сущность для описания параметров модели
+    /// Структура для описания параметров модели
     /// </summary>
     public struct Parameter
     {
