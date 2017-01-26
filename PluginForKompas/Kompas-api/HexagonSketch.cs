@@ -6,20 +6,32 @@ namespace PluginForKompas
     /// <summary>
     ///  Класс рисования эскиза правильного шестиугольника
     /// </summary>
-    public static class HexagonSketch
+    public class HexagonSketch
     {
+        private KompasApp _app;
+
+        /// <summary>
+        /// Коструктор с параметром
+        /// </summary>
+        /// <param name="app">Приложение компас</param>
+        public HexagonSketch(KompasApp app)
+        {
+            this._app = app;
+        }
+
         /// <summary>
         /// Метод создает эскиз правильного шестиугольника
         /// </summary>
         /// <param name="rad">Радиус описанной окружности шестиугольника</param>
-        public static bool DrawHexagon(double rad)
+        public bool DrawHexagon(double rad)
         {
             try
             {
-                ksSketchDefinition def = SketchCreator.MakeSketch();
+                SketchCreator sketch = new SketchCreator(_app);
+                ksSketchDefinition def = sketch.MakeSketch();
                 ksDocument2D doc = (ksDocument2D)def.BeginEdit();
                 short polyParam = (short)StructType2DEnum.ko_RegularPolygonParam;
-                ksRegularPolygonParam param = (ksRegularPolygonParam)KompasApp.Kompas.GetParamStruct(polyParam);
+                ksRegularPolygonParam param = (ksRegularPolygonParam)_app.Kompas.GetParamStruct(polyParam);
                 param.count = 6;
                 param.xc = 0;
                 param.yc = 0;

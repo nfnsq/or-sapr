@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Kompas6API5">
+      <HintPath>..\..\..\Program Files\ASCON\KOMPAS-3D V16\SDK\C#\Common\Kompas6API5.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files (x86)\NUnit 2.6.4\bin\framework\nunit.framework.dll</HintPath>
@@ -44,16 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GearCreator\GearBuilderTest.cs" />
+    <Compile Include="LoadTests\GearBuilderLoadTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GearCreator\GearCreator.csproj">
       <Project>{0b383148-64fe-4127-82ab-61c4e95f9324}</Project>
       <Name>GearCreator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Global\Global.csproj">
-      <Project>{10cca96c-60bc-4669-8905-8dc38d512dc9}</Project>
-      <Name>Global</Name>
     </ProjectReference>
     <ProjectReference Include="..\Kompas-api\Kompas-api.csproj">
       <Project>{2be4a84a-e7f7-4d70-97fa-a4c2bf659a47}</Project>

@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.kompasCheckGroupBox = new System.Windows.Forms.GroupBox();
-            this.kompasCheckBox = new System.Windows.Forms.CheckBox();
             this.buildButton = new System.Windows.Forms.Button();
             this.dataGroupBox = new System.Windows.Forms.GroupBox();
             this.depthOfTheHexagonDipTextBox = new System.Windows.Forms.TextBox();
@@ -48,35 +46,20 @@
             this.centerHoleDiameterLabel = new System.Windows.Forms.Label();
             this.gearRigidityUnitLabel = new System.Windows.Forms.Label();
             this.teethCountLabel = new System.Windows.Forms.Label();
-            this.kompasCheckGroupBox.SuspendLayout();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.startToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.kompasGroupBox = new System.Windows.Forms.GroupBox();
+            this.startButton = new System.Windows.Forms.Button();
+            this.startKompasLabel = new System.Windows.Forms.Label();
             this.dataGroupBox.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.kompasGroupBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // kompasCheckGroupBox
-            // 
-            this.kompasCheckGroupBox.Controls.Add(this.kompasCheckBox);
-            this.kompasCheckGroupBox.Location = new System.Drawing.Point(12, 12);
-            this.kompasCheckGroupBox.Name = "kompasCheckGroupBox";
-            this.kompasCheckGroupBox.Size = new System.Drawing.Size(304, 46);
-            this.kompasCheckGroupBox.TabIndex = 0;
-            this.kompasCheckGroupBox.TabStop = false;
-            this.kompasCheckGroupBox.Text = "Kompas";
-            // 
-            // kompasCheckBox
-            // 
-            this.kompasCheckBox.AutoSize = true;
-            this.kompasCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.kompasCheckBox.Name = "kompasCheckBox";
-            this.kompasCheckBox.Size = new System.Drawing.Size(87, 17);
-            this.kompasCheckBox.TabIndex = 0;
-            this.kompasCheckBox.Text = "Run Kompas";
-            this.kompasCheckBox.UseVisualStyleBackColor = true;
-            this.kompasCheckBox.CheckedChanged += new System.EventHandler(this.kompasCheckBox_CheckedChanged);
             // 
             // buildButton
             // 
             this.buildButton.Enabled = false;
-            this.buildButton.Location = new System.Drawing.Point(241, 313);
+            this.buildButton.Location = new System.Drawing.Point(233, 305);
             this.buildButton.Name = "buildButton";
             this.buildButton.Size = new System.Drawing.Size(75, 23);
             this.buildButton.TabIndex = 1;
@@ -102,7 +85,7 @@
             this.dataGroupBox.Controls.Add(this.centerHoleDiameterLabel);
             this.dataGroupBox.Controls.Add(this.gearRigidityUnitLabel);
             this.dataGroupBox.Controls.Add(this.teethCountLabel);
-            this.dataGroupBox.Location = new System.Drawing.Point(14, 71);
+            this.dataGroupBox.Location = new System.Drawing.Point(12, 65);
             this.dataGroupBox.Name = "dataGroupBox";
             this.dataGroupBox.Size = new System.Drawing.Size(302, 234);
             this.dataGroupBox.TabIndex = 3;
@@ -256,29 +239,77 @@
             this.teethCountLabel.TabIndex = 0;
             this.teethCountLabel.Text = "Count of gear teeth";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startToolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 336);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(323, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // startToolStripStatusLabel
+            // 
+            this.startToolStripStatusLabel.Name = "startToolStripStatusLabel";
+            this.startToolStripStatusLabel.Size = new System.Drawing.Size(115, 17);
+            this.startToolStripStatusLabel.Text = "Please, start Kompas";
+            // 
+            // kompasGroupBox
+            // 
+            this.kompasGroupBox.Controls.Add(this.startKompasLabel);
+            this.kompasGroupBox.Controls.Add(this.startButton);
+            this.kompasGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.kompasGroupBox.Name = "kompasGroupBox";
+            this.kompasGroupBox.Size = new System.Drawing.Size(302, 47);
+            this.kompasGroupBox.TabIndex = 5;
+            this.kompasGroupBox.TabStop = false;
+            this.kompasGroupBox.Text = "Kompas";
+            // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(221, 18);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 0;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // startKompasLabel
+            // 
+            this.startKompasLabel.AutoSize = true;
+            this.startKompasLabel.Location = new System.Drawing.Point(6, 23);
+            this.startKompasLabel.Name = "startKompasLabel";
+            this.startKompasLabel.Size = new System.Drawing.Size(124, 13);
+            this.startKompasLabel.TabIndex = 1;
+            this.startKompasLabel.Text = "Start Kompas application";
+            // 
             // GearConstructingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 348);
+            this.ClientSize = new System.Drawing.Size(323, 358);
+            this.Controls.Add(this.kompasGroupBox);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dataGroupBox);
             this.Controls.Add(this.buildButton);
-            this.Controls.Add(this.kompasCheckGroupBox);
             this.Name = "GearConstructingForm";
             this.Text = "Gear Creator";
-            this.kompasCheckGroupBox.ResumeLayout(false);
-            this.kompasCheckGroupBox.PerformLayout();
             this.dataGroupBox.ResumeLayout(false);
             this.dataGroupBox.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.kompasGroupBox.ResumeLayout(false);
+            this.kompasGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox kompasCheckGroupBox;
         private System.Windows.Forms.Button buildButton;
-        private System.Windows.Forms.CheckBox kompasCheckBox;
         private System.Windows.Forms.GroupBox dataGroupBox;
         private System.Windows.Forms.TextBox depthOfTheHexagonDipTextBox;
         private System.Windows.Forms.TextBox stiffenerDepthTextBox;
@@ -296,6 +327,11 @@
         private System.Windows.Forms.Label centerHoleDiameterLabel;
         private System.Windows.Forms.Label gearRigidityUnitLabel;
         private System.Windows.Forms.Label teethCountLabel;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel startToolStripStatusLabel;
+        private System.Windows.Forms.GroupBox kompasGroupBox;
+        private System.Windows.Forms.Label startKompasLabel;
+        private System.Windows.Forms.Button startButton;
     }
 }
 

@@ -6,26 +6,38 @@ using System.Runtime.InteropServices;
 
 namespace PluginForKompas
 {
+    /// <summary>
+    /// Сущность для получения указателей на интерфейсы приложения Kompas
+    /// </summary>
     public class KompasApp
     {
-        public static KompasObject Kompas;
-        public static ksDocument3D Doc3d;
-        public static ksPart Part;
-        public static ksEntity BasePlane;
-        public static ksMathematic2D Mat;
+        // Указатель на главный интерфейс API системы КОМПАС
+        public KompasObject Kompas;
+
+        // Указатель на интерфейс документа трехмерной модели
+        public ksDocument3D Doc3d;
+
+        // Указатель на интерфейс главного компонента
+        public ksPart Part;
+
+        // Указатель на интерфейс базовой плоскости XOZ
+        public ksEntity BasePlane;
+
+        // Указатель на интерфейс для работы с математическими функциями
+        public ksMathematic2D Mat;
 
         /// <summary>
         /// Метод создает новый документ трехмерной 
         /// модели и получает указатель на интерфейс 
         /// главного компонента созданного документа
         /// </summary>
-        public static void CreateNewDoc()
+        public void CreateNewDoc()
         {
             try
             {
                 Doc3d = (ksDocument3D)Kompas.Document3D();
-                Doc3d.fileName = "Gear";
                 Doc3d.Create();
+                Doc3d.fileName = "Gear";
                 Doc3d.UpdateDocumentParam();
                 Part = (ksPart)Doc3d.GetPart((short)Part_Type.pTop_Part);
                 BasePlane = (ksEntity)Part.GetDefaultEntity((short)Obj3dType.o3d_planeXOZ);
@@ -35,14 +47,15 @@ namespace PluginForKompas
             {
                 MessageBox.Show("KompasApplication doesn't found!", "Warning",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
             }
         }
 
         /// <summary>
         /// Метод получает указатель активного интерфейса
-        /// API КОМПАС или создает новое при его отсутствии
+        /// API КОМПАС
         /// </summary>
-        public static void GetActiveApp()
+        public void GetActiveApp()
         {
             if (Kompas == null)
             {
@@ -53,41 +66,30 @@ namespace PluginForKompas
                 }
                 catch (COMException)
                 {
-                    Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");
-                    Kompas = (KompasObject)Activator.CreateInstance(t);
-                }
-                if (Kompas != null)
-                {
-                    Kompas.Visible = true;
-                    Kompas.ActivateControllerAPI();
+
                 }
             }
-        }
-
-        /// <summary>
-        /// Метод закрывает приложение КОМПАС
-        /// </summary>
-        public static void Exit()
-        {
-            Kompas.Quit();
-        }
-
-        /// <summary>
-        /// Метод смещает базовую плоскость по оси OY на заданное расстояние
-        /// </summary>
-        /// <param name="offset">Расстояние от базовой плоскости до смещеннной</param>
-        public static void MovingBasePlaneByYAxis(double offset, bool direction)
-        {
-            ksEntity plane = (ksEntity)Part.NewEntity((short)Obj3dType.o3d_planeOffset);
-            ksPlaneOffsetDefinition planeDef = (ksPlaneOffsetDefinition)plane.GetDefinition();
-            if (planeDef != null)
+            if (Kompas != null)
             {
-                planeDef.SetPlane(BasePlane);
-                planeDef.direction = direction;
-                planeDef.offset = offset;
-                plane.Create();
+                Kompas.Visible = true;
+                Kompas.ActivateControllerAPI();
             }
-            BasePlane = plane;
+            
+        }
+        /// <summary>
+        /// Метод создает новое прилжение Компас и 
+        /// получает указатель на главный интерфейс API
+        /// </summary>
+        public void NewApp()
+        {
+            
+            Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");
+            Kompas = (KompasObject)Activator.CreateInstance(t);
+            if (Kompas != null)
+            {
+                Kompas.Visible = true;
+                Kompas.ActivateControllerAPI();
+            }
         }
     }
 }

@@ -7,51 +7,29 @@ using System.ComponentModel;
 
 namespace View
 {
+    /// <summary>
+    /// СУщность для создания пользовательского 
+    /// интерфейса программы
+    /// </summary>
     public partial class GearConstructingForm : Form
     {
+        public KompasApp app = new KompasApp();
         private double _rigidity = 0;
         private double _teethCount = 0;
-
+        
+        /// <summary>
+        /// Конструктор формы, инициализирующий его компоненты
+        /// </summary>
         public GearConstructingForm()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// Запуск приложения КОМПАС
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void kompasCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (kompasCheckBox.Checked)
+            app.GetActiveApp();
+            if (app.Kompas != null)
             {
-                KompasApp.GetActiveApp();
-                countOfGearTeethTextBox.Enabled = true;
-                rigidityOfGeatUnitTextBox.Enabled = true;
-                buildButton.Enabled = true;
-            }
-
-            if (!kompasCheckBox.Checked)
-            {
-                KompasApp.Exit();
-                foreach (Control groupBoxData in this.Controls)
-                {
-                    if ((groupBoxData is GroupBox)
-                        && (groupBoxData.Name == "dataGroupBox"))
-                    {
-                        foreach (Control textbox in groupBoxData.Controls)
-                        {
-                            if (textbox is TextBox)
-                            {
-                                textbox.Enabled = false;
-                            }
-                        }
-                    }
-                }
-                buildButton.Enabled = false;
+                GotActiveApp();
             }
         }
+
 
         /// <summary>
         /// Создать новую деталь
@@ -66,8 +44,8 @@ namespace View
             {
                 try
                 {
-                    GearBuilder Gear = new GearBuilder(param);
-                    Gear.New();
+                    GearBuilder Gear = new GearBuilder(app, param);
+                    Gear.CreateGear();
                 }
                 catch
                 {
@@ -99,11 +77,27 @@ namespace View
                                 Array.Resize<Parameter>(ref parameters, length);
                                 parameters[length - 1].Value = double.Parse(textbox.Text,
                                     CultureInfo.InvariantCulture);
-                                parameters[length - 1].Descrpiption = textbox.Name;
+                                if (textbox.Name == countOfGearTeethTextBox.Name)
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.Count;
+                                if (textbox.Name == rigidityOfGeatUnitTextBox.Name)
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.Rigidity;
+                                if (textbox.Name == diameterOfTheCenterHoleTextBox.Name)
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.CenterHole;
+                                if (textbox.Name == diameterOfTheCircumentialHolesTextBox.Name)
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.CircumentalHoles;
+                                if (textbox.Name == diameterOfTheHeaxagonCircumscribedCircleTextBox.Name)
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.HexagonDiameter;
+                                if (textbox.Name == depthOfTheHexagonDipTextBox.Name)
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.HexagonDepth;
+                                if (textbox.Name == stiffenersWidthTextBox.Name)
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.StiffenerWidth;
+                                if (textbox.Name == stiffenerDepthTextBox.Name)
+                                    parameters[length - 1].Descrpiption = PluginForKompas.Properties.Resources.StiffenerDepth;
                             }
                         }
                     }
                 }
+
                 if (length != 8)
                     throw new Exception();
                 return parameters;
@@ -119,9 +113,6 @@ namespace View
         /// <summary>
         /// Метод для проверки основных параметров шестерни
         /// </summary>
-        /// <param name="regex">Регулярное выражение</param>
-        /// <param name="text">Проверяемая строка</param>
-        /// <param name="e">Данные отменяемого события</param>
         private void DataValidating(object sender, CancelEventArgs e)
         {
             Regex regex = new Regex("^[0-9]+$");
@@ -185,6 +176,24 @@ namespace View
                 }
                 else diameterOfTheHeaxagonCircumscribedCircleTextBox.Enabled = false;
             }
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            startToolStripStatusLabel.Text = "Kompas starting...";
+            app.GetActiveApp();
+            if (app.Kompas == null)
+                app.NewApp();
+            GotActiveApp();
+        }
+
+        private void GotActiveApp()
+        {
+            startButton.Enabled = false;
+            countOfGearTeethTextBox.Enabled = true;
+            rigidityOfGeatUnitTextBox.Enabled = true;
+            buildButton.Enabled = true;
+            startToolStripStatusLabel.Text = "Kompas started.";
         }
     }
 }
